@@ -15,7 +15,7 @@ public class M1_0_HelloActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.m10_activity);
 
         imgvIcon = (ImageView) findViewById(R.id.imgvIcon);
 
