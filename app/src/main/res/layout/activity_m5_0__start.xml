@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_start"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.M5_0_StartActivity">
+<LinearLayout
+    android:layout_marginTop="50dp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/imgDungChoi"
+        android:background="@drawable/button_image_help_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageButton
+        android:id="@+id/img50"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/button_image_help_5050"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageButton
+        android:id="@+id/imgCall"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/button_image_help_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageButton
+        android:id="@+id/imgHoiNhom"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/button_image_help_audience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+
+    <FrameLayout
+        android:layout_marginTop="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvCau"
+            android:textSize="22sp"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:text="Câu 1"
+            android:background="@drawable/start_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvClock"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="30"
+            android:background="@drawable/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvTienThuong"
+            android:layout_gravity="right|center_vertical"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:text="1.000.000"
+            android:background="@drawable/start_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/lnlQuesstion"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/questions"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:textColor="#FFF"
+            android:text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnlDapAnA"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/dapan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_marginLeft="110dp"
+            android:layout_gravity="center_vertical"
+            android:text="A:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="aaaaaaaaaaaaaaaaaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnlDapAnB"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/dapan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_marginLeft="110dp"
+            android:layout_gravity="center_vertical"
+            android:text="B:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="aaaaaaaaaaaaaaaaaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnlDapAnC"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/dapan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_marginLeft="110dp"
+            android:layout_gravity="center_vertical"
+            android:text="C:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="aaaaaaaaaaaaaaaaaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lnlDapAnD"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/dapan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:layout_marginLeft="110dp"
+            android:layout_gravity="center_vertical"
+            android:text="D:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="#FFF"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="aaaaaaaaaaaaaaaaaaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

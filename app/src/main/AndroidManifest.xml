@@ -9,7 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.M4_0_HomeActivity" />
+        <activity android:name=".activity.M5_0_StartActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.M4_0_HomeActivity"
+            android:noHistory="true" />
         <activity
             android:name=".activity.M3_1_DangKyInGameActivity"
             android:noHistory="true" />
@@ -23,11 +33,7 @@
         <activity
             android:name=".activity.M1_0_HelloActivity"
             android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
