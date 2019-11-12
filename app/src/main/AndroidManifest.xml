@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".abcActibity"></activity>
+        <activity android:name=".bcdActtivity"></activity>
+        <activity android:name=".abcActibity" />
         <activity android:name=".M2_0_LoginActivity" />
         <activity android:name=".M1_0_HelloActivity">
             <intent-filter>
