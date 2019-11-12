@@ -9,10 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".M2_0_LoginActivity" >
-
-        </activity>
-        <activity android:name=".M1_0_HelloActivity">
+        <activity android:name=".activity.M4_0_HomeActivity" />
+        <activity
+            android:name=".activity.M3_1_DangKyInGameActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".activity.M3_0_DangKyActivity"
+            android:noHistory="true"
+            android:parentActivityName=".activity.M2_0_LoginActivity" />
+        <activity
+            android:name=".activity.M2_0_LoginActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".activity.M1_0_HelloActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

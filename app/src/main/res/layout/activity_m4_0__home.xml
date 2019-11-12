@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_start"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".activity.M4_0_HomeActivity">
+
+    <ImageView
+
+        android:id="@+id/imgvIconM40"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/icon" />
+
+    <Button
+        android:id="@+id/btnBatDauM40"
+        android:layout_marginTop="50dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_menu"
+        android:text="Bắt đầu"
+        android:textAllCaps="false"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnThongKeM40"
+        android:layout_marginTop="8dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_menu"
+        android:text="Thống kê"
+        android:textAllCaps="false"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:onClick="btnAmThanhOnclickM40"
+        android:id="@+id/btnAmThanhM40"
+        android:layout_marginTop="8dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_menu"
+        android:text="Âm thanh: Bật"
+        android:textAllCaps="false"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnHuongDanM40"
+        android:layout_marginTop="8dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_menu"
+        android:text="Hướng dẫn"
+        android:textAllCaps="false"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnChiaSeM40"
+        android:layout_marginTop="8dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_menu"
+        android:text="Chia sẻ"
+        android:textAllCaps="false"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnDangXuatM40"
+        android:layout_marginTop="8dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_menu"
+        android:text="Đăng xuất"
+        android:textAllCaps="false"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnThoatM40"
+        android:layout_marginTop="8dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_menu"
+        android:text="Thoát"
+        android:textAllCaps="false"
+        android:textColor="#FFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

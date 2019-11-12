@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_start"
     android:orientation="vertical"
-    tools:context=".activity.M2_0_LoginActivity">
+    tools:context=".activity.M3_0_DangKyActivity">
 
     <ImageView
 
-        android:id="@+id/imgvIconM20"
+        android:id="@+id/imgvIconM30"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_gravity="center_horizontal"
@@ -18,8 +18,9 @@
         android:src="@drawable/icon" />
 
     <LinearLayout
-        android:id="@+id/lnlM20"
+        android:id="@+id/lnlM30"
         android:layout_width="wrap_content"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
@@ -59,50 +60,49 @@
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
 
-            <CheckBox
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:background="#1864E6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="8dp"
-                android:textColor="#FFFFFF"
-                android:text="Nhớ mật khẩu?"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+            android:hint="Xác Nhận Mật Khẩu"
+            android:textColorHint="#FF0000">
+
+            <EditText
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#B39DDB"
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
 
 
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/lnlM201"
+        android:id="@+id/lnlM31"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content">
         <Button
-            android:onClick="btnDangNhapM20"
+            android:onClick="btnTiepTucM30"
             android:layout_marginRight="16dp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
-            android:text="Đăng nhập"
+            android:text="Tiếp tục"
             android:background="@drawable/btn_menu"
             android:layout_width="140dp"
             android:layout_height="wrap_content"/>
         <Button
-            android:onClick="btnDangKyClick"
+            android:onClick="btnQuayLaiM30"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
-            android:text="Đăng ký"
+            android:text="Quay lại"
             android:layout_marginLeft="16dp"
             android:background="@drawable/btn_menu"
             android:layout_width="140dp"

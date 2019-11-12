@@ -1,8 +1,7 @@
-package fpoly.com.duan1;
+package fpoly.com.duan1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -10,7 +9,10 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
-public class M1_0_HelloActivity extends AppCompatActivity {
+import fpoly.com.duan1.R;
+import fpoly.com.duan1.base.BaseActivity;
+
+public class M1_0_HelloActivity extends BaseActivity {
 
     private ImageView imgvIcon;
 
@@ -25,19 +27,7 @@ public class M1_0_HelloActivity extends AppCompatActivity {
         animation.setInterpolator(new LinearInterpolator());
         imgvIcon.startAnimation(animation);
 
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    sleep(3000);
-                    startActivity(new Intent(M1_0_HelloActivity.this, M2_0_LoginActivity.class));
+         startActivityAnimation(this,3000,M2_0_LoginActivity.class);
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                super.run();
-            }
-        };
-        thread.start();
     }
 }

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/bg_start"
-    tools:context=".M1_0_HelloActivity">
+    tools:context=".activity.M1_0_HelloActivity">
     <ImageView
         android:id="@+id/imgvIcon"
         android:src="@drawable/icon"
