@@ -1,8 +1,8 @@
 package fpoly.com.duan1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class M2_0_LoginActivity extends AppCompatActivity {
 
@@ -10,5 +10,6 @@ public class M2_0_LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m2_0__login);
+        //aa
     }
 }
