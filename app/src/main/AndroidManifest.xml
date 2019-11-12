@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ttetetee"></activity>
         <activity android:name=".M2_0_LoginActivity" />
         <activity android:name=".M1_0_HelloActivity">
             <intent-filter>
