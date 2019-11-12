@@ -8,8 +8,8 @@
         android:toDegrees="360" />
     <scale
         android:duration="2000"
-        android:fromXScale="0.5"
-        android:fromYScale="0.5"
+        android:fromXScale="0.1"
+        android:fromYScale="0.1"
         android:pivotX="50%"
         android:pivotY="50%"
         android:toXScale="1"

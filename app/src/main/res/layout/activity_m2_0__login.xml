@@ -4,24 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_start"
+    android:orientation="vertical"
     tools:context=".M2_0_LoginActivity">
-    <ImageView
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/imgvIcon"
-        android:src="@drawable/icon"
-        android:layout_marginTop="30dp"
-        android:layout_width="140dp"
-        android:layout_height="140dp"/>
-    <LinearLayout
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/questions"
-        android:layout_height="wrap_content">
 
+    <ImageView
+
+        android:id="@+id/imgvIconM20"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/icon" />
+
+    <LinearLayout
+        android:id="@+id/lnlM20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/questions"
+        android:orientation="vertical"
+        android:padding="40dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:hint="Tài Khoản"
+            android:textColorHint="#FF0000">
+
+            <EditText
+                android:inputType="text"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#B39DDB"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+
+            android:hint="Mật Khẩu"
+            android:textColorHint="#FF0000">
+
+            <EditText
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#B39DDB"
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="#1864E6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
+                android:textColor="#FFFFFF"
+                android:text="Nhớ mật khẩu?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lnlM201"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_marginRight="16dp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:text="Đăng nhập"
+            android:background="@drawable/btn_menu"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:text="Đăng ký"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/btn_menu"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </LinearLayout>
