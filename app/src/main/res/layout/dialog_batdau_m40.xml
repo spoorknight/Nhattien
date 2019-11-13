@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:background="#00131313"
+    android:layout_height="match_parent" >
+    <ImageView
+        android:src="@drawable/show_question"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="80dp"
+        android:text="Bạn đã sẵn sàng đến với câu hỏi của chúng tôi?"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/dialog_confirm"
+            android:text="NO"
+            android:textColor="#FFF"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/dialog_confirm"
+            android:text="YES"
+            android:textColor="#FFF"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,8 +1,12 @@
 package fpoly.com.duan1.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,7 +24,9 @@ public class M4_0_HomeActivity extends AppCompatActivity {
     private Button btnHuongDanM40;
     private Button btnChiaSeM40;
     private Button btnDangXuatM40;
+    private MediaPlayer mediaPlayer;
     private Button btnThoatM40;
+    private AlertDialog alertDialog;
 
 
     @Override
@@ -54,15 +60,49 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         btnHuongDanM40.startAnimation(animation);
         btnDangXuatM40.startAnimation(animation);
 
+//Chạy nhạc nền
+        backMusic();
+
     }
 
     public void btnAmThanhOnclickM40(View view) {
         String text=btnAmThanhM40.getText().toString();
         if (text.equals("Âm thanh: Bật")){
             btnAmThanhM40.setText("Âm thanh: Tắt");
+            stopBackMusic();
         }else {
 
             btnAmThanhM40.setText("Âm thanh: Bật");
+            backMusic();
         }
+    }
+
+
+//click nút Bắt Đầu
+    public void btnBatDauM40(View view) {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        View view1= LayoutInflater.from(this).inflate(R.layout.dialog_batdau_m40,null);
+        builder.setView(view1);
+
+        builder.create();
+       alertDialog= builder.show();
+
+    }
+
+ //Load nhạc nền
+    public void backMusic() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Log.e("AAAAAAA", "aaaaaaaaa");
+                mediaPlayer.start();
+            }
+        });
+    }
+ //Dừng nhạc nền
+    public void stopBackMusic() {
+        mediaPlayer.release();
     }
 }

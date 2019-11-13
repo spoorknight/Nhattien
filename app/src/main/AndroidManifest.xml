@@ -11,15 +11,18 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.M5_0_StartActivity">
 
+
+        </activity>
+        <activity
+            android:name=".activity.M4_0_HomeActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.M4_0_HomeActivity"
-            android:noHistory="true" />
+
         <activity
             android:name=".activity.M3_1_DangKyInGameActivity"
             android:noHistory="true" />
