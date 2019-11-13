@@ -3,8 +3,10 @@ package fpoly.com.duan1.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,8 @@ public class M4_0_HomeActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     private Button btnThoatM40;
     private AlertDialog alertDialog;
+    private MediaPlayer mediaPlayer0;
+    public static boolean at   ;
 
 
     @Override
@@ -61,48 +65,126 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         btnDangXuatM40.startAnimation(animation);
 
 //Chạy nhạc nền
+
+        at=getIntent().getBooleanExtra("at",true);
+         if (!at){
+             btnAmThanhM40.setText("Âm thanh: Tắt");
+         }
+
         backMusic();
+
 
     }
 
     public void btnAmThanhOnclickM40(View view) {
-        String text=btnAmThanhM40.getText().toString();
-        if (text.equals("Âm thanh: Bật")){
+        String text = btnAmThanhM40.getText().toString();
+        if (text.equals("Âm thanh: Bật")) {
             btnAmThanhM40.setText("Âm thanh: Tắt");
+            M5_0_StartActivity.at = false;
             stopBackMusic();
-        }else {
-
+            at = false;
+        } else {
+            at = true;
+            M5_0_StartActivity.at = true;
             btnAmThanhM40.setText("Âm thanh: Bật");
             backMusic();
         }
     }
 
 
-//click nút Bắt Đầu
+    //click nút Bắt Đầu
     public void btnBatDauM40(View view) {
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        View view1= LayoutInflater.from(this).inflate(R.layout.dialog_batdau_m40,null);
+
+//Chạy nhạc tình huống
+        stopBackMusic();
+        musicTinhHuong(R.raw.ready);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_batdau_m40, null);
         builder.setView(view1);
+        Button btnNoDialog;
+        Button btnYesDialog;
 
-        builder.create();
-       alertDialog= builder.show();
+        btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
+        btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
 
-    }
-
- //Load nhạc nền
-    public void backMusic() {
-        mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
-        mediaPlayer.start();
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//Sự kiện nút no trong dialog
+        btnNoDialog.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCompletion(MediaPlayer mp) {
-                Log.e("AAAAAAA", "aaaaaaaaa");
-                mediaPlayer.start();
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                stopMTH();
+                backMusic();
             }
         });
+
+//Sự kiện nút có
+        btnYesDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (at) {
+                    stopMTH();
+                    musicTinhHuong(R.raw.batdauchoi);
+
+                    //chuyển màn hình khi nhạc chạy hết
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            startActivity(new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class));
+                        }
+                    });
+                } else {
+
+                    startActivity(new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class));
+                }
+
+            }
+        });
+
+        builder.create();
+        alertDialog = builder.show();
+        builder.setCancelable(false);
+
     }
- //Dừng nhạc nền
+
+    //Load nhạc nền
+    public void backMusic() {
+        if (at) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    Log.e("AAAAAAA", "aaaaaaaaa");
+                    mediaPlayer.start();
+                }
+            });
+        }
+
+    }
+
+    //Dừng nhạc nền
     public void stopBackMusic() {
-        mediaPlayer.release();
+        if (at) {
+
+            mediaPlayer.release();
+        }
+    }
+
+    //chạy nhạc tình huống
+    public void musicTinhHuong(int music) {
+        if (at) {
+
+            mediaPlayer0 = MediaPlayer.create(this, music);
+            mediaPlayer0.start();
+        }
+    }
+
+    //dừng nhạc tình huống
+    public void stopMTH() {
+        if (at) {
+
+            mediaPlayer0.stop();
+        }
     }
 }
