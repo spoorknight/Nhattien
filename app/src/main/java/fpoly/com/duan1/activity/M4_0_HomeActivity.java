@@ -147,6 +147,8 @@ public class M4_0_HomeActivity extends AppCompatActivity {
 
     }
 
+
+
     //Load nhạc nền
     public void backMusic() {
         if (at) {
@@ -186,5 +188,28 @@ public class M4_0_HomeActivity extends AppCompatActivity {
 
             mediaPlayer0.stop();
         }
+    }
+
+    public void btnHuongDanOnClickM40(View view) {
+        stopBackMusic();
+        musicTinhHuong(R.raw.luatchoi);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_huongdan, null);
+        builder.setView(view1);
+
+        ImageView imgClose;
+        imgClose = view1.findViewById(R.id.imgv_close_dialog_huongdan);
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                stopMTH();
+                backMusic();
+            }
+        });
+        builder.create();
+        alertDialog = builder.show();
+        builder.setCancelable(false);
     }
 }

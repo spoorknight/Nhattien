@@ -57,6 +57,7 @@
         android:textStyle="bold" />
 
     <Button
+        android:onClick="btnHuongDanOnClickM40"
         android:id="@+id/btnHuongDanM40"
         android:layout_marginTop="8dp"
         android:layout_width="200dp"
