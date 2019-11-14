@@ -95,6 +95,7 @@
 
     <Button
         android:id="@+id/btnThoatM40"
+        android:onClick="btnThoatOnClickM40"
         android:layout_marginTop="8dp"
         android:layout_width="200dp"
         android:layout_height="40dp"
