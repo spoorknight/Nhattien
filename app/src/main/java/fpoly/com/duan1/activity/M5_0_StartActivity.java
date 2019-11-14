@@ -1,10 +1,13 @@
 package fpoly.com.duan1.activity;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -40,6 +43,15 @@ public class M5_0_StartActivity extends AppCompatActivity {
     private int giayClock;
     public static boolean at;
     private CountDownTimer countDownTimer;
+    private TextView tvA;
+    private TextView tvAnsA;
+    private TextView tvB;
+    private TextView tvAnsB;
+    private TextView tvC;
+    private TextView tvAnsC;
+    private TextView tvD;
+    private TextView tvAnsD;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +72,15 @@ public class M5_0_StartActivity extends AppCompatActivity {
         lnlDapAnB = (LinearLayout) findViewById(R.id.lnlDapAnB);
         lnlDapAnC = (LinearLayout) findViewById(R.id.lnlDapAnC);
         lnlDapAnD = (LinearLayout) findViewById(R.id.lnlDapAnD);
+        tvA = (TextView) findViewById(R.id.tvA);
+        tvAnsA = (TextView) findViewById(R.id.tvAnsA);
+        tvB = (TextView) findViewById(R.id.tvB);
+        tvAnsB = (TextView) findViewById(R.id.tvAnsB);
+        tvC = (TextView) findViewById(R.id.tvC);
+        tvAnsC = (TextView) findViewById(R.id.tvAnsC);
+        tvD = (TextView) findViewById(R.id.tvD);
+        tvAnsD = (TextView) findViewById(R.id.tvAnsD);
+
 
 //Animation
         Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.m50_clock);
@@ -114,7 +135,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
     //Đồng hồ
     public void clock() {
         giayClock = 32;
-          countDownTimer = new CountDownTimer(giayClock*1000, 1000) {
+        countDownTimer = new CountDownTimer(giayClock * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 giayClock--;
@@ -309,5 +330,189 @@ public class M5_0_StartActivity extends AppCompatActivity {
         builder.create();
         alertDialog = builder.show();
         builder.setCancelable(false);
+    }
+
+
+    //Sự kiện click vào trợ giúp 50:50
+    public void btn50(View view) {
+        //Mở nhạc tình huống
+        musicTinhHuong(R.raw.touch_sound);
+        //Hiện dialog 'Có chắc chắn sử dụng quyền trợ giúp'
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_dungchoi, null);
+        builder.setView(view1);
+        Button btnNoDialog;
+        Button btnYesDialog;
+
+        btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
+        btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
+
+        //hủy quyền trợ giúp
+        btnNoDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        //Chấp nhận sử dụng quyền trợ giúp 50
+        btnYesDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                stopBackMusic();
+                musicTinhHuong(R.raw.sound5050);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        img50.setImageResource(R.drawable.button_image_helpx_5050_x);
+                        musicTinhHuong(R.raw.s50);
+                        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                backMusic(R.raw.moc1);
+                            }
+                        });
+
+                        //Loại bỏ hai đáp án sai trong câu hỏi
+                    }
+                });
+            }
+        });
+        builder.create();
+        alertDialog = builder.show();
+        builder.setCancelable(false);
+    }
+
+    //Sự kiện clcik vào câu trả lời A
+    public void ansA(View view) {
+
+        tvA.setTextColor(Color.BLUE);
+        tvAnsA.setTextColor(Color.BLUE);
+        lnlDapAnA.setClickable(false);
+        lnlDapAnB.setClickable(false);
+        lnlDapAnC.setClickable(false);
+        lnlDapAnD.setClickable(false);
+        lnlDapAnA.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_a);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                        nhayAns();
+                    }
+                });
+            }
+        });
+    }
+
+    //Sự kiện clcik vào câu trả lời B
+    public void ansB(View view) {
+
+        tvB.setTextColor(Color.BLUE);
+        tvAnsB.setTextColor(Color.BLUE);
+        lnlDapAnA.setClickable(false);
+        lnlDapAnB.setClickable(false);
+        lnlDapAnC.setClickable(false);
+        lnlDapAnD.setClickable(false);
+        lnlDapAnB.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_b);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                    }
+                });
+            }
+        });
+    }
+
+    //Sự kiện clcik vào câu trả lời C
+    public void ansC(View view) {
+
+        tvC.setTextColor(Color.BLUE);
+        tvAnsC.setTextColor(Color.BLUE);
+        lnlDapAnA.setClickable(false);
+        lnlDapAnB.setClickable(false);
+        lnlDapAnC.setClickable(false);
+        lnlDapAnD.setClickable(false);
+        lnlDapAnC.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_c);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                    }
+                });
+            }
+        });
+    }
+
+    //Sự kiện clcik vào câu trả lời D
+    public void ansD(View view) {
+
+        tvD.setTextColor(Color.BLUE);
+        tvAnsD.setTextColor(Color.BLUE);
+        lnlDapAnA.setClickable(false);
+        lnlDapAnB.setClickable(false);
+        lnlDapAnC.setClickable(false);
+        lnlDapAnD.setClickable(false);
+        lnlDapAnD.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_d);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                    }
+                });
+            }
+        });
+    }
+
+    //Test nhấp nháy đáp án
+    public void nhayAns(){
+        final int[] i = {10};
+        CountDownTimer countDownTimer=new CountDownTimer(2000,200) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                i[0]--;
+                if (i[0]%2==0){
+                    lnlDapAnA.setBackgroundResource(R.drawable.ans);
+                }else {
+                    lnlDapAnA.setBackgroundResource(R.drawable.chose);
+                }
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        countDownTimer.start();
     }
 }
