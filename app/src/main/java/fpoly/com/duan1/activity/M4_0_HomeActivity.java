@@ -219,4 +219,13 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         alertDialog = builder.show();
         builder.setCancelable(false);
     }
+
+    public void btnThoatOnClickM40(View view) {
+
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        stopBackMusic();
+        startActivity(startMain);
+        finish();
+    }
 }
