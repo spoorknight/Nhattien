@@ -132,7 +132,6 @@ public class M5_0_StartActivity extends AppCompatActivity {
         imgHoiNhom.startAnimation(animation4);
 
 
-
 //kích hoạt đồng hồ
         clock();
 
@@ -147,20 +146,34 @@ public class M5_0_StartActivity extends AppCompatActivity {
         List<CauHoi3> cauHoi3s = mySQL.getAllCauHoi3();
         cauHois = new ArrayList<>();
         // gán các câu hỏi sau khi random vào list câu hỏi
-        for (int i = 0; i < 15; i++) {
-            int rd = random.nextInt(20);
-            int rd1 = random.nextInt(20);
-            int rd2 = random.nextInt(20);
-            if (i < 5) {
-                cauHois.add(new CauHoi(cauHoi1s.get(rd).getId(), cauHoi1s.get(rd).getCauHoi(), cauHoi1s.get(rd).getDapAnDung(), cauHoi1s.get(rd).getDapAnSai1(), cauHoi1s.get(rd).getDapAnSai2(), cauHoi1s.get(rd).getDapAnSai3()));
-            } else if (i < 10 && i >= 5) {
-                cauHois.add(new CauHoi(cauHoi2s.get(rd1).getId(), cauHoi2s.get(rd1).getCauHoi(), cauHoi2s.get(rd1).getDapAnDung(), cauHoi2s.get(rd1).getDapAnSai1(), cauHoi2s.get(rd1).getDapAnSai2(), cauHoi2s.get(rd1).getDapAnSai3()));
-            } else {
-                cauHois.add(new CauHoi(cauHoi3s.get(rd2).getId(), cauHoi3s.get(rd2).getCauHoi(), cauHoi3s.get(rd2).getDapAnDung(), cauHoi3s.get(rd2).getDapAnSai1(), cauHoi3s.get(rd2).getDapAnSai2(), cauHoi3s.get(rd2).getDapAnSai3()));
 
-            }
 
-        }
+        int rd = random.nextInt(5);
+        int rd1 = random.nextInt(5) + 4;
+        int rd2 = random.nextInt(5) + 8;
+        int rd3 = random.nextInt(5) + 12;
+        int rd4 = random.nextInt(5) + 16;
+
+        cauHois.add(new CauHoi(cauHoi1s.get(rd).getId(), cauHoi1s.get(rd).getCauHoi(), cauHoi1s.get(rd).getDapAnDung(), cauHoi1s.get(rd).getDapAnSai1(), cauHoi1s.get(rd).getDapAnSai2(), cauHoi1s.get(rd).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi1s.get(rd1).getId(), cauHoi1s.get(rd1).getCauHoi(), cauHoi1s.get(rd1).getDapAnDung(), cauHoi1s.get(rd1).getDapAnSai1(), cauHoi1s.get(rd1).getDapAnSai2(), cauHoi1s.get(rd1).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi1s.get(rd2).getId(), cauHoi1s.get(rd2).getCauHoi(), cauHoi1s.get(rd2).getDapAnDung(), cauHoi1s.get(rd2).getDapAnSai1(), cauHoi1s.get(rd2).getDapAnSai2(), cauHoi1s.get(rd2).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi1s.get(rd3).getId(), cauHoi1s.get(rd3).getCauHoi(), cauHoi1s.get(rd3).getDapAnDung(), cauHoi1s.get(rd3).getDapAnSai1(), cauHoi1s.get(rd3).getDapAnSai2(), cauHoi1s.get(rd3).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi1s.get(rd4).getId(), cauHoi1s.get(rd4).getCauHoi(), cauHoi1s.get(rd4).getDapAnDung(), cauHoi1s.get(rd4).getDapAnSai1(), cauHoi1s.get(rd4).getDapAnSai2(), cauHoi1s.get(rd4).getDapAnSai3()));
+
+
+        cauHois.add(new CauHoi(cauHoi2s.get(rd).getId(), cauHoi2s.get(rd).getCauHoi(), cauHoi2s.get(rd).getDapAnDung(), cauHoi2s.get(rd).getDapAnSai1(), cauHoi2s.get(rd).getDapAnSai2(), cauHoi2s.get(rd).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi2s.get(rd1).getId(), cauHoi2s.get(rd1).getCauHoi(), cauHoi2s.get(rd1).getDapAnDung(), cauHoi2s.get(rd1).getDapAnSai1(), cauHoi2s.get(rd1).getDapAnSai2(), cauHoi2s.get(rd1).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi2s.get(rd2).getId(), cauHoi2s.get(rd2).getCauHoi(), cauHoi2s.get(rd2).getDapAnDung(), cauHoi2s.get(rd2).getDapAnSai1(), cauHoi2s.get(rd2).getDapAnSai2(), cauHoi2s.get(rd2).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi2s.get(rd3).getId(), cauHoi2s.get(rd3).getCauHoi(), cauHoi2s.get(rd3).getDapAnDung(), cauHoi2s.get(rd3).getDapAnSai1(), cauHoi2s.get(rd3).getDapAnSai2(), cauHoi2s.get(rd3).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi2s.get(rd4).getId(), cauHoi2s.get(rd4).getCauHoi(), cauHoi2s.get(rd4).getDapAnDung(), cauHoi2s.get(rd4).getDapAnSai1(), cauHoi2s.get(rd4).getDapAnSai2(), cauHoi2s.get(rd4).getDapAnSai3()));
+
+
+        cauHois.add(new CauHoi(cauHoi3s.get(rd).getId(), cauHoi3s.get(rd).getCauHoi(), cauHoi3s.get(rd).getDapAnDung(), cauHoi3s.get(rd).getDapAnSai1(), cauHoi3s.get(rd).getDapAnSai2(), cauHoi3s.get(rd).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi3s.get(rd1).getId(), cauHoi3s.get(rd1).getCauHoi(), cauHoi3s.get(rd1).getDapAnDung(), cauHoi3s.get(rd1).getDapAnSai1(), cauHoi3s.get(rd1).getDapAnSai2(), cauHoi3s.get(rd1).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi3s.get(rd2).getId(), cauHoi3s.get(rd2).getCauHoi(), cauHoi3s.get(rd2).getDapAnDung(), cauHoi3s.get(rd2).getDapAnSai1(), cauHoi3s.get(rd2).getDapAnSai2(), cauHoi3s.get(rd2).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi3s.get(rd3).getId(), cauHoi3s.get(rd3).getCauHoi(), cauHoi3s.get(rd3).getDapAnDung(), cauHoi3s.get(rd3).getDapAnSai1(), cauHoi3s.get(rd3).getDapAnSai2(), cauHoi3s.get(rd3).getDapAnSai3()));
+        cauHois.add(new CauHoi(cauHoi3s.get(rd4).getId(), cauHoi3s.get(rd4).getCauHoi(), cauHoi3s.get(rd4).getDapAnDung(), cauHoi3s.get(rd4).getDapAnSai1(), cauHoi3s.get(rd4).getDapAnSai2(), cauHoi3s.get(rd4).getDapAnSai3()));
+
 
 //gán câu hỏi
 
@@ -816,7 +829,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
             }
             if (cauSo == 15) {
 
-                tienThuong=150000000;
+                tienThuong = 150000000;
                 mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
@@ -1009,7 +1022,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
     }
 
     //Không cho click
-    public void vhhClick(){
+    public void vhhClick() {
         imgHoiNhom.setClickable(false);
         imgDungChoi.setClickable(false);
         imgCall.setClickable(false);
@@ -1021,7 +1034,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
     }
 
     //kich hoạt click
-    public void khClick(){
+    public void khClick() {
         imgHoiNhom.setClickable(true);
         imgDungChoi.setClickable(true);
         imgCall.setClickable(true);
