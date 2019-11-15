@@ -102,18 +102,22 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
         View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_batdau_m40, null);
         builder.setView(view1);
-        Button btnNoDialog;
-        Button btnYesDialog;
+        final Button btnNoDialog;
+        final Button btnYesDialog;
 
         btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
         btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
 
+        btnNoDialog.setClickable(true);
+        btnYesDialog.setClickable(true);
 //Sự kiện nút no trong dialog
         btnNoDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
                 stopMTH();
+                btnNoDialog.setClickable(false);
+                btnYesDialog.setClickable(false);
                 backMusic();
             }
         });
@@ -122,6 +126,9 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         btnYesDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                btnNoDialog.setClickable(false);
+                btnYesDialog.setClickable(false);
                 if (at) {
                     stopMTH();
                     musicTinhHuong(R.raw.batdauchoi);

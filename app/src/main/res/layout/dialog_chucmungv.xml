@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="290dp"
+    android:background="@drawable/show_question">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginRight="80dp"
+        android:text="Như vậy là chúng ta đã tìm được triệu phú của ngày hôm nay!!! \n\nChúc mừng bạn là người chơi xuất sắc nhất!!"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+
+</FrameLayout>
