@@ -163,13 +163,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
         }
 
 //gán câu hỏi
-        musicTinhHuong(R.raw.ques01);
-        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                backMusic(R.raw.moc1);
-            }
-        });
+
         ganCauHoi();
 
     }
@@ -337,13 +331,15 @@ public class M5_0_StartActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
                 View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_nhanhthuong, null);
                 builder.setView(view1);
-                Button btnOkNhanThuong;
+                final Button btnOkNhanThuong;
 
                 btnOkNhanThuong = (Button) view1.findViewById(R.id.btnOkNhanThuong);
 
                 btnOkNhanThuong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        stopMTH();
+                        btnOkNhanThuong.setClickable(false);
                         if (at) {
                             M4_0_HomeActivity.at = true;
                         }
@@ -431,10 +427,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
         dapAnChon = 1;
         tvA.setTextColor(Color.BLUE);
         tvAnsA.setTextColor(Color.BLUE);
-        lnlDapAnA.setClickable(false);
-        lnlDapAnB.setClickable(false);
-        lnlDapAnC.setClickable(false);
-        lnlDapAnD.setClickable(false);
+        vhhClick();
         lnlDapAnA.setBackgroundResource(R.drawable.chose);
         countDownTimer.cancel();
         stopBackMusic();
@@ -459,10 +452,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
         dapAnChon = 2;
         tvB.setTextColor(Color.BLUE);
         tvAnsB.setTextColor(Color.BLUE);
-        lnlDapAnA.setClickable(false);
-        lnlDapAnB.setClickable(false);
-        lnlDapAnC.setClickable(false);
-        lnlDapAnD.setClickable(false);
+        vhhClick();
         lnlDapAnB.setBackgroundResource(R.drawable.chose);
         countDownTimer.cancel();
         stopBackMusic();
@@ -487,10 +477,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
         dapAnChon = 3;
         tvC.setTextColor(Color.BLUE);
         tvAnsC.setTextColor(Color.BLUE);
-        lnlDapAnA.setClickable(false);
-        lnlDapAnB.setClickable(false);
-        lnlDapAnC.setClickable(false);
-        lnlDapAnD.setClickable(false);
+        vhhClick();
         lnlDapAnC.setBackgroundResource(R.drawable.chose);
         countDownTimer.cancel();
         stopBackMusic();
@@ -515,10 +502,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
         dapAnChon = 4;
         tvD.setTextColor(Color.BLUE);
         tvAnsD.setTextColor(Color.BLUE);
-        lnlDapAnA.setClickable(false);
-        lnlDapAnB.setClickable(false);
-        lnlDapAnC.setClickable(false);
-        lnlDapAnD.setClickable(false);
+        vhhClick();
         lnlDapAnD.setBackgroundResource(R.drawable.chose);
         countDownTimer.cancel();
         stopBackMusic();
@@ -1021,5 +1005,17 @@ public class M5_0_StartActivity extends AppCompatActivity {
         } else {
             return tienThuong / 1000000 + "." + "000.000" + " VNĐ";
         }
+    }
+
+    //Không cho click
+    public void vhhClick(){
+        imgHoiNhom.setClickable(false);
+        imgDungChoi.setClickable(false);
+        imgCall.setClickable(false);
+        img50.setClickable(false);
+        lnlDapAnC.setClickable(false);
+        lnlDapAnB.setClickable(false);
+        lnlDapAnD.setClickable(false);
+        lnlDapAnA.setClickable(false);
     }
 }
