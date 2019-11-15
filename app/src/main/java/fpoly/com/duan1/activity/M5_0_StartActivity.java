@@ -738,6 +738,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Xây dựng phương thức gán câu hỏi vào các view
     public void ganCauHoi() {
+        khClick();
         lnlDapAnC.setClickable(true);
         lnlDapAnA.setClickable(true);
         lnlDapAnB.setClickable(true);
@@ -1018,4 +1019,17 @@ public class M5_0_StartActivity extends AppCompatActivity {
         lnlDapAnD.setClickable(false);
         lnlDapAnA.setClickable(false);
     }
+
+    //kich hoạt click
+    public void khClick(){
+        imgHoiNhom.setClickable(true);
+        imgDungChoi.setClickable(true);
+        imgCall.setClickable(true);
+        img50.setClickable(true);
+        lnlDapAnC.setClickable(true);
+        lnlDapAnB.setClickable(true);
+        lnlDapAnD.setClickable(true);
+        lnlDapAnA.setClickable(true);
+    }
+
 }
