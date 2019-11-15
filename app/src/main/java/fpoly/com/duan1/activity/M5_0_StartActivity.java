@@ -163,6 +163,13 @@ public class M5_0_StartActivity extends AppCompatActivity {
         }
 
 //gán câu hỏi
+        musicTinhHuong(R.raw.ques01);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                backMusic(R.raw.moc1);
+            }
+        });
         ganCauHoi();
 
     }

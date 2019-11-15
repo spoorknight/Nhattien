@@ -137,6 +137,7 @@ public class M4_0_HomeActivity extends AppCompatActivity {
                     mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
+                            M5_0_StartActivity.at=true;
                             startActivity(new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class));
                         }
                     });
