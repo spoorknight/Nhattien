@@ -3,10 +3,16 @@ package fpoly.com.duan1.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +21,13 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.facebook.CallbackManager;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import fpoly.com.duan1.R;
 
@@ -30,7 +43,7 @@ public class M4_0_HomeActivity extends AppCompatActivity {
     private Button btnThoatM40;
     private AlertDialog alertDialog;
     private MediaPlayer mediaPlayer0;
-    public static boolean at   ;
+    public static boolean at;
 
 
     @Override
@@ -198,6 +211,7 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         }
     }
 
+    //Dialog hướng dẫn luật chơi
     public void btnHuongDanOnClickM40(View view) {
         stopBackMusic();
         musicTinhHuong(R.raw.luatchoi);
@@ -221,6 +235,7 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         builder.setCancelable(false);
     }
 
+    //Thoát trò chơi
     public void btnThoatOnClickM40(View view) {
 
         Intent startMain = new Intent(Intent.ACTION_MAIN);
@@ -229,4 +244,18 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         startActivity(startMain);
         finish();
     }
+
+    //Chia sẻ lên fb
+    public void btnChiaSeOnClickM40(View view) {
+        ShareDialog shareDialog = new ShareDialog(this);
+
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+
+        ShareLinkContent shareLinkContent = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=arrasol.ailatrieuphu&hl=vi"))
+                .build();
+        shareDialog.show(shareLinkContent);
+    }
+
+
 }
