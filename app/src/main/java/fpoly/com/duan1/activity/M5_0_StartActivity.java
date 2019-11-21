@@ -47,11 +47,11 @@ public class M5_0_StartActivity extends AppCompatActivity {
     private LinearLayout lnlDapAnA;
     private LinearLayout lnlDapAnB;
     private LinearLayout lnlDapAnC;
-    private AlertDialog alertDialog;
+    private AlertDialog alertDialog, alertDialog1, alertDialog2;
     private LinearLayout lnlDapAnD;
     private int giayClock;
     public static boolean at;
-    private CountDownTimer countDownTimer;
+    private CountDownTimer countDownTimer, countDownTimer1, countDownTimer2, countDownTimer3;
     private TextView tvA;
     private TextView tvAnsA;
     private TextView tvB;
@@ -69,7 +69,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
     private List<CauHoi> cauHois;
     private Random random;
 
-    private boolean troGiup5050 = true, troGiupCall = true, troGiupHoi = true;
+    private boolean troGiup5050 = true, troGiupCall = true, troGiupHoi = true, suDung50 = false, suDungCall = false, suDungHoi = false;
 
 
     @Override
@@ -211,10 +211,10 @@ public class M5_0_StartActivity extends AppCompatActivity {
                 btnNoDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        troGiup5050=true;
-                        troGiupCall=true;
-                        troGiupHoi=true;
-                        cauSo=1;
+                        troGiup5050 = true;
+                        troGiupCall = true;
+                        troGiupHoi = true;
+                        cauSo = 1;
                         ganCauHoi();
                         alertDialog.dismiss();
                         clock();
@@ -249,7 +249,11 @@ public class M5_0_StartActivity extends AppCompatActivity {
                         Button btnOkNhanThuong;
 
                         btnOkNhanThuong = (Button) view1.findViewById(R.id.btnOkNhanThuong);
+                        TextView tvSoTienThuong;
 
+                        tvSoTienThuong = view1.findViewById(R.id.tvSoTienThuong);
+
+                        tvSoTienThuong.setText(convertTien());
                         btnOkNhanThuong.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -298,7 +302,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
             });
         } else {
             mediaPlayer = MediaPlayer.create(this, music);
-            mediaPlayer0.setVolume(0, 0);
+            mediaPlayer.setVolume(0, 0);
             mediaPlayer.start();
         }
 
@@ -434,7 +438,9 @@ public class M5_0_StartActivity extends AppCompatActivity {
         btnYesDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                countDownTimer.cancel();
+                dungDongHo();
+                suDung50 = true;
                 troGiup5050 = false;
                 alertDialog.dismiss();
                 stopBackMusic();
@@ -450,6 +456,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
                                 backMusic(R.raw.moc1);
                             }
                         });
+                        pasueClock();
 
                         if (viTriDA == 1) {
                             tvAnsB.setText("");
@@ -485,6 +492,10 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời A
     public void ansA(View view) {
+        if (countDownTimer1 != null) {
+
+            countDownTimer1.cancel();
+        }
         dapAnChon = 1;
         tvA.setTextColor(Color.BLUE);
         tvAnsA.setTextColor(Color.BLUE);
@@ -510,6 +521,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời B
     public void ansB(View view) {
+        countDownTimer1.cancel();
         dapAnChon = 2;
         tvB.setTextColor(Color.BLUE);
         tvAnsB.setTextColor(Color.BLUE);
@@ -535,6 +547,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời C
     public void ansC(View view) {
+        countDownTimer1.cancel();
         dapAnChon = 3;
         tvC.setTextColor(Color.BLUE);
         tvAnsC.setTextColor(Color.BLUE);
@@ -560,6 +573,10 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời D
     public void ansD(View view) {
+        if (countDownTimer1 != null) {
+
+            countDownTimer1.cancel();
+        }
         dapAnChon = 4;
         tvD.setTextColor(Color.BLUE);
         tvAnsD.setTextColor(Color.BLUE);
@@ -837,6 +854,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
     //Xây dựng phương thức gán câu hỏi vào các view
     public void ganCauHoi() {
         khClick();
+        suDung50 = false;
         lnlDapAnC.setClickable(true);
         lnlDapAnA.setClickable(true);
         lnlDapAnB.setClickable(true);
@@ -1019,9 +1037,9 @@ public class M5_0_StartActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            troGiup5050=true;
-                            troGiupCall=true;
-                            troGiupHoi=true;
+                            troGiup5050 = true;
+                            troGiupCall = true;
+                            troGiupHoi = true;
                             alertDialog.dismiss();
                             cauSo = 1;
                             clock();
@@ -1184,7 +1202,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
         btnNoDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
+                alertDialog2.dismiss();
             }
         });
 
@@ -1192,26 +1210,507 @@ public class M5_0_StartActivity extends AppCompatActivity {
         btnYesDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                troGiupCall = false;
+                imgCall.setClickable(false);
+                countDownTimer.cancel();
+                dungDongHo();
+                suDungCall=true;
+
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
                 View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_call, null);
                 builder.setView(view1);
-                  LinearLayout lnlGate;
-                  LinearLayout lnlObama;
-                  LinearLayout lnlSteave;
+                LinearLayout lnlGate;
+                LinearLayout lnlObama;
+                LinearLayout lnlSteave;
 
                 lnlGate = (LinearLayout) view1.findViewById(R.id.lnlGate);
                 lnlObama = (LinearLayout) view1.findViewById(R.id.lnlObama);
                 lnlSteave = (LinearLayout) view1.findViewById(R.id.lnlSteave);
 
+                lnlGate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        stopBackMusic();
+                        musicTinhHuong(R.raw.call);
+                        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+
+                                dialogCall("Bill Gate");
+                            }
+                        });
+
+                    }
+                });
+                lnlObama.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        stopBackMusic();
+                        musicTinhHuong(R.raw.call);
+                        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+
+                                dialogCall("Obama");
+                            }
+                        });
+                    }
+                });
+                lnlSteave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        stopBackMusic();
+                        musicTinhHuong(R.raw.call);
+                        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+
+                                dialogCall("Steave");
+                            }
+                        });
+                    }
+                });
 
 
                 builder.create();
                 alertDialog = builder.show();
                 builder.setCancelable(false);
+
+
+            }
+        });
+        builder.create();
+        alertDialog2 = builder.show();
+        builder.setCancelable(false);
+    }
+
+    //Dừng đồng hồ khi chọn sự trợ giúp
+    public void pasueClock() {
+        final int[] giay = {Integer.parseInt(tvClock.getText().toString())};
+        countDownTimer1 = new CountDownTimer(giay[0] * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                tvClock.setText(giay[0]-- + "");
+            }
+
+            @Override
+            public void onFinish() {
+                tvClock.setText(0 + "");
+
+                //hết giờ chơi
+                stopBackMusic();
+                musicTinhHuong(R.raw.out_of_time);
+                AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
+                View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_hetgio, null);
+                builder.setView(view1);
+                Button btnNoDialog;
+                Button btnYesDialog;
+
+                btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
+                btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
+
+                //Bắt sự kiện chơi lại
+                btnNoDialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        troGiup5050 = true;
+                        troGiupCall = true;
+                        troGiupHoi = true;
+                        cauSo = 1;
+                        ganCauHoi();
+                        alertDialog.dismiss();
+                        clock();
+                        if (at) {
+                            stopMTH();
+                            musicTinhHuong(R.raw.ques01);
+                            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+
+                                    backMusic(R.raw.moc1);
+                                }
+                            });
+                        }
+
+                        img50.setImageResource(R.drawable.button_image_help_5050);
+                        imgCall.setImageResource(R.drawable.button_image_help_call);
+                        imgHoiNhom.setImageResource(R.drawable.button_image_help_audience);
+
+                    }
+                });
+
+                //Bắt sự kiện nút nhận thưởng
+                btnYesDialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        stopMTH();
+                        musicTinhHuong(R.raw.lose);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
+                        View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_nhanhthuong, null);
+                        builder.setView(view1);
+                        Button btnOkNhanThuong;
+                        TextView tvSoTienThuong;
+
+                        tvSoTienThuong = view1.findViewById(R.id.tvSoTienThuong);
+
+                        btnOkNhanThuong = (Button) view1.findViewById(R.id.btnOkNhanThuong);
+
+                        tvSoTienThuong.setText(convertTien());
+                        btnOkNhanThuong.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (at) {
+                                    M4_0_HomeActivity.at = true;
+                                }
+                                Intent intent = new Intent(M5_0_StartActivity.this, M4_0_HomeActivity.class);
+                                if (at) {
+                                    intent.putExtra("at", true);
+                                } else {
+
+                                    intent.putExtra("at", false);
+                                }
+                                startActivity(intent);
+
+                            }
+                        });
+
+
+                        builder.create();
+                        alertDialog = builder.show();
+                        builder.setCancelable(false);
+
+                    }
+                });
+
+                builder.create();
+                alertDialog = builder.show();
+                builder.setCancelable(false);
+
+            }
+        };
+        countDownTimer1.start();
+
+    }
+
+
+
+    //Dialog call
+    public void dialogCall(String tenNV) {
+        backMusic(R.raw.background_music);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dilog, null);
+        builder.setView(view1);
+        TextView tvTenTitle;
+        TextView tvTenNV0;
+        TextView tvTenNV1;
+        TextView tvCauHoi;
+        TextView tvTenNV2;
+        TextView tvDA;
+        TextView tvTenNV3;
+        TextView imgOK;
+        LinearLayout lnlDialogCall0;
+        LinearLayout lnlDialogCall1;
+        LinearLayout lnlDialogCall2;
+        LinearLayout lnlDialogCall3;
+        LinearLayout lnlDialogCall4;
+        LinearLayout lnlDialogCall5;
+        LinearLayout lnlDialogCall6;
+
+        lnlDialogCall0 = (LinearLayout) view1.findViewById(R.id.lnlDialogCall0);
+        lnlDialogCall1 = (LinearLayout) view1.findViewById(R.id.lnlDialogCall1);
+        lnlDialogCall2 = (LinearLayout) view1.findViewById(R.id.lnlDialogCall2);
+        lnlDialogCall3 = (LinearLayout) view1.findViewById(R.id.lnlDialogCall3);
+        lnlDialogCall4 = (LinearLayout) view1.findViewById(R.id.lnlDialogCall4);
+        lnlDialogCall5 = (LinearLayout) view1.findViewById(R.id.lnlDialogCall5);
+        lnlDialogCall6 = (LinearLayout) view1.findViewById(R.id.lnlDialogCall6);
+
+
+        tvTenTitle = (TextView) view1.findViewById(R.id.tvTenTitle);
+        tvTenNV0 = (TextView) view1.findViewById(R.id.tvTenNV0);
+        tvTenNV1 = (TextView) view1.findViewById(R.id.tvTenNV1);
+        tvCauHoi = (TextView) view1.findViewById(R.id.tvCauHoi);
+        tvTenNV2 = (TextView) view1.findViewById(R.id.tvTenNV2);
+        tvDA = (TextView) view1.findViewById(R.id.tvDA);
+        tvTenNV3 = (TextView) view1.findViewById(R.id.tvTenNV3);
+        imgOK = (TextView) view1.findViewById(R.id.imgOK);
+
+        tvTenTitle.setText(tenNV + ":");
+        tvTenNV0.setText(tenNV + ":");
+        tvTenNV1.setText(tenNV + ":");
+        tvTenNV2.setText(tenNV + ":");
+        tvTenNV3.setText(tenNV + ":");
+
+        tvCauHoi.setText(cauHois.get(cauSo - 1).getCauHoi());
+
+        String da = "";
+        switch (viTriDA) {
+            case 1:
+                da = "A";
+                break;
+            case 2:
+                da = "B";
+                break;
+            case 3:
+                da = "C";
+                break;
+            case 4:
+                da = "D";
+                break;
+        }
+
+        tvDA.setText(da + ". " + cauHois.get(cauSo - 1).getDapAnDung());
+
+        imgOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgCall.setImageResource(R.drawable.button_image_helpx_call_x);
+                alertDialog1.dismiss();
+                alertDialog.dismiss();
+                alertDialog2.dismiss();
+                pasueClock();
+            }
+        });
+
+        Animation animation = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call0);
+        animation.setInterpolator(new LinearInterpolator());
+        lnlDialogCall0.startAnimation(animation);
+
+        Animation animation1 = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call1);
+        animation1.setInterpolator(new LinearInterpolator());
+        lnlDialogCall1.startAnimation(animation1);
+
+        Animation animation2 = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call2);
+        animation2.setInterpolator(new LinearInterpolator());
+        lnlDialogCall2.startAnimation(animation2);
+
+        Animation animation3 = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call3);
+        animation3.setInterpolator(new LinearInterpolator());
+        lnlDialogCall3.startAnimation(animation3);
+
+        Animation animation4 = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call4);
+        animation4.setInterpolator(new LinearInterpolator());
+        lnlDialogCall4.startAnimation(animation4);
+
+        Animation animation5 = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call5);
+        animation5.setInterpolator(new LinearInterpolator());
+        lnlDialogCall5.startAnimation(animation5);
+
+        Animation animation6 = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call6);
+        animation6.setInterpolator(new LinearInterpolator());
+        lnlDialogCall6.startAnimation(animation6);
+        Animation animation7 = AnimationUtils.loadAnimation(M5_0_StartActivity.this, R.anim.dialog_call7);
+        animation7.setInterpolator(new LinearInterpolator());
+        imgOK.startAnimation(animation7);
+
+
+        builder.create();
+        alertDialog1 = builder.show();
+        builder.setCancelable(false);
+
+    }
+
+    //trợ giúp hỏi ý kiến khán giả
+
+    public void yKienKhanGia(View view) {
+
+
+        musicTinhHuong(R.raw.touch_sound);
+        troGiupHoi = false;
+        //Hiện dialog 'Có chắc chắn sử dụng quyền trợ giúp'
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_dungchoi, null);
+        builder.setView(view1);
+        Button btnNoDialog;
+        Button btnYesDialog;
+
+        btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
+        btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
+
+        //hủy quyền trợ giúp
+        btnNoDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnYesDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnYesDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgHoiNhom.setClickable(false);
+                dungDongHo();
+                suDungHoi=true;
+                musicTinhHuong(R.raw.bg_audience);
+                imgHoiNhom.setImageResource(R.drawable.button_image_helpx_audience_x);
+                countDownTimer.cancel();
+                dialogYKienKhanGia();
             }
         });
         builder.create();
         alertDialog = builder.show();
         builder.setCancelable(false);
+
+    }
+
+    public void dialogYKienKhanGia() {
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
+                View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_ykien, null);
+                builder.setView(view1);
+
+                ImageButton imgClose;
+                TextView tvPTA;
+                TextView tvPTB;
+                TextView tvPTC;
+                TextView tvPTD;
+                TextView tvCotA;
+                TextView tvCotB;
+                TextView tvCotC;
+                TextView tvCotD;
+
+                imgClose = (ImageButton) view1.findViewById(R.id.imgClose);
+                tvPTA = (TextView) view1.findViewById(R.id.tvPTA);
+                tvPTB = (TextView) view1.findViewById(R.id.tvPTB);
+                tvPTC = (TextView) view1.findViewById(R.id.tvPTC);
+                tvPTD = (TextView) view1.findViewById(R.id.tvPTD);
+                tvCotA = (TextView) view1.findViewById(R.id.tvCotA);
+                tvCotB = (TextView) view1.findViewById(R.id.tvCotB);
+                tvCotC = (TextView) view1.findViewById(R.id.tvCotC);
+                tvCotD = (TextView) view1.findViewById(R.id.tvCotD);
+
+                imgClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog1.dismiss();
+                        alertDialog.dismiss();
+                        pasueClock();
+                    }
+                });
+
+                String a = null, b = null, c = null, d = null;
+
+                if (suDung50) {
+                    switch (viTriDA) {
+                        case 1:
+                            tvCotA.setHeight(280);
+                            tvCotB.setHeight(0);
+                            tvCotC.setHeight(0);
+                            tvCotD.setHeight(120);
+                            a = "70%";
+                            b = "0%";
+                            c = "0%";
+                            d = "30%";
+                            break;
+                        case 2:
+                            tvCotB.setHeight(280);
+                            tvCotA.setHeight(0);
+                            tvCotC.setHeight(0);
+                            tvCotD.setHeight(120);
+                            a = "0%";
+                            b = "70%";
+                            c = "0%";
+                            d = "30%";
+                            break;
+                        case 3:
+                            tvCotA.setHeight(120);
+                            tvCotB.setHeight(0);
+                            tvCotC.setHeight(280);
+                            tvCotD.setHeight(0);
+                            a = "30%";
+                            b = "0%";
+                            c = "70%";
+                            d = "0%";
+                            break;
+                        case 4:
+                            tvCotA.setHeight(120);
+                            tvCotB.setHeight(0);
+                            tvCotC.setHeight(0);
+                            tvCotD.setHeight(280);
+                            a = "30%";
+                            b = "0%";
+                            c = "0%";
+                            d = "70%";
+                            break;
+
+                    }
+                } else {
+                    switch (viTriDA) {
+                        case 1:
+                            tvCotA.setHeight(200);
+                            tvCotB.setHeight(100);
+                            tvCotC.setHeight(40);
+                            tvCotD.setHeight(60);
+                            a = "50%";
+                            b = "25%";
+                            c = "10%";
+                            d = "15%";
+                            break;
+                        case 2:
+                            tvCotB.setHeight(100);
+                            tvCotA.setHeight(200);
+                            tvCotC.setHeight(0);
+                            tvCotD.setHeight(100);
+                            a = "25%";
+                            b = "50%";
+                            c = "0%";
+                            d = "25%";
+                            break;
+                        case 3:
+                            tvCotA.setHeight(100);
+                            tvCotB.setHeight(60);
+                            tvCotC.setHeight(240);
+                            tvCotD.setHeight(0);
+                            a = "25%";
+                            b = "15%";
+                            c = "60%";
+                            d = "0%";
+                            break;
+                        case 4:
+                            tvCotA.setHeight(60);
+                            tvCotB.setHeight(0);
+                            tvCotC.setHeight(120);
+                            tvCotD.setHeight(220);
+                            a = "15%";
+                            b = "0%";
+                            c = "30%";
+                            d = "55%";
+                            break;
+
+                    }
+                }
+
+                tvPTA.setText(a);
+                tvPTB.setText(b);
+                tvPTC.setText(c);
+                tvPTD.setText(d);
+
+
+                builder.create();
+                alertDialog1 = builder.show();
+                builder.setCancelable(false);
+            }
+        });
+
+    }
+
+    //dừng đồng hồ
+    public void dungDongHo() {
+        if (suDung50||suDungHoi||suDungCall) {
+            countDownTimer1.cancel();
+        }
+
     }
 }

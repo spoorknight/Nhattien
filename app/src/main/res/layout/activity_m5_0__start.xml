@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <ImageButton
+        android:onClick="yKienKhanGia"
         android:id="@+id/imgHoiNhom"
         android:layout_marginLeft="8dp"
         android:background="@drawable/button_image_help_audience"

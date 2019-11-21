@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/nen"
+    android:layout_height="wrap_content">
+<TextView
+    android:id="@+id/tvTenTitle"
+    android:layout_marginTop="16dp"
+    android:layout_gravity="center"
+    android:textSize="22sp"
+    android:textStyle="bold"
+    android:textColor="#FFF"
+    android:text="Bill Gate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:background="@drawable/questions"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="400dp">
+
+        <LinearLayout
+            android:id="@+id/lnlDialogCall0"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvTenNV0"
+                android:textSize="15sp"
+                android:text="Bill Gate:"
+                android:textStyle="bold"
+                android:textColor="#FB9F00"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:text="Xin chào!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingRight="40dp"
+            android:id="@+id/lnlDialogCall1"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="15sp"
+                android:text="MC:"
+                android:textStyle="bold"
+                android:textColor="#FB9F00"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:text="Xin chào, bạn của bạn đang gặp một câu hỏi trong trò chơi Ai là triệu phú của chúng tôi. Bạn đã sẵn sàng giúp đỡ chưa?"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnlDialogCall2"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvTenNV1"
+                android:textSize="15sp"
+                android:text="Steave:"
+                android:textStyle="bold"
+                android:textColor="#FB9F00"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="OK. Tôi đã sẵn sàng!"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                 android:layout_width="280dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:paddingRight="40dp"
+            android:id="@+id/lnlDialogCall3"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="15sp"
+                android:text="Tôi:"
+                android:textStyle="bold"
+                android:textColor="#FB9F00"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Câu hỏi: "
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:maxLines="3"
+                android:id="@+id/tvCauHoi"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:text="Con nào là cậu ông trời?"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingRight="40dp"
+            android:id="@+id/lnlDialogCall4"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvTenNV2"
+                android:textSize="15sp"
+                android:text="Steave:"
+                android:textStyle="bold"
+                android:textColor="#FB9F00"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Đáp án: "
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:maxLines="1"
+                android:id="@+id/tvDA"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lnlDialogCall5"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="15sp"
+                android:text="Tôi:"
+                android:textStyle="bold"
+                android:textColor="#FB9F00"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Bạn chắc chắn chứ?"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="40dp"
+            android:id="@+id/lnlDialogCall6"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvTenNV3"
+                android:textSize="15sp"
+                android:text="Steave:"
+                android:textStyle="bold"
+                android:textColor="#FB9F00"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Tôi chắc chắn!"
+                android:textSize="15sp"
+                android:textColor="#FFF"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/imgOK"
+        android:textStyle="bold"
+        android:text="OK"
+        android:gravity="center"
+        android:textColor="#FFF"
+        android:layout_gravity="center"
+        android:background="@drawable/a"
+        android:layout_width="48dp"
+        android:layout_height="48dp"/>
+</LinearLayout>
