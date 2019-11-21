@@ -258,4 +258,9 @@ public class M4_0_HomeActivity extends AppCompatActivity {
     }
 
 
+    //Bảng xếp hạng
+    public void btnThongKeM40(View view) {
+        stopBackMusic();
+        startActivity(new Intent(M4_0_HomeActivity.this, M6_0_XepHangActivity.class));
+    }
 }
