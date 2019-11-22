@@ -492,10 +492,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời A
     public void ansA(View view) {
-        if (countDownTimer1 != null) {
-
-            countDownTimer1.cancel();
-        }
+        dungDongHo();
         dapAnChon = 1;
         tvA.setTextColor(Color.BLUE);
         tvAnsA.setTextColor(Color.BLUE);
@@ -521,7 +518,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời B
     public void ansB(View view) {
-        countDownTimer1.cancel();
+        dungDongHo();
         dapAnChon = 2;
         tvB.setTextColor(Color.BLUE);
         tvAnsB.setTextColor(Color.BLUE);
@@ -547,7 +544,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời C
     public void ansC(View view) {
-        countDownTimer1.cancel();
+        dungDongHo();
         dapAnChon = 3;
         tvC.setTextColor(Color.BLUE);
         tvAnsC.setTextColor(Color.BLUE);
@@ -573,10 +570,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
 
     //Sự kiện clcik vào câu trả lời D
     public void ansD(View view) {
-        if (countDownTimer1 != null) {
-
-            countDownTimer1.cancel();
-        }
+        dungDongHo();
         dapAnChon = 4;
         tvD.setTextColor(Color.BLUE);
         tvAnsD.setTextColor(Color.BLUE);
