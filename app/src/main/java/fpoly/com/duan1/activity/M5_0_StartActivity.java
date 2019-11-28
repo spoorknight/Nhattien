@@ -625,7 +625,7 @@ public class M5_0_StartActivity extends AppCompatActivity {
         return viTriDA;
     }
 
-    public void ganTien() {
+    public void ganTien( ) {
         switch (cauSo) {
             case 1:
                 if (at) {
