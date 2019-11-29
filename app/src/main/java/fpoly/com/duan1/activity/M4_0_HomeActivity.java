@@ -134,7 +134,6 @@ public class M4_0_HomeActivity extends AppCompatActivity {
                 backMusic();
             }
         });
-
 //Sự kiện nút có
         btnYesDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +144,6 @@ public class M4_0_HomeActivity extends AppCompatActivity {
                 if (at) {
                     stopMTH();
                     musicTinhHuong(R.raw.batdauchoi);
-
                     //chuyển màn hình khi nhạc chạy hết
                     mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override

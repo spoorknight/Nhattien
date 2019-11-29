@@ -1,5 +1,6 @@
 package fpoly.com.duan1.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -17,6 +18,7 @@ import java.util.List;
 import fpoly.com.duan1.model.CauHoi1;
 import fpoly.com.duan1.model.CauHoi2;
 import fpoly.com.duan1.model.CauHoi3;
+import fpoly.com.duan1.model.TaiKhoan;
 
 public class MySQL extends SQLiteOpenHelper {
 
@@ -143,6 +145,30 @@ public class MySQL extends SQLiteOpenHelper {
             cursor.close();
         }
         return books;
+    }
+    public void insertUser(TaiKhoan taiKhoan){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Username",taiKhoan.getUsername());
+        contentValues.put("Password",taiKhoan.getPassword());
+        sqLiteDatabase.insert("Manager",null,contentValues);
+        sqLiteDatabase.close();
+    }
+    public List<TaiKhoan> getAllTaiKhoan(){
+        List<TaiKhoan> taiKhoans = new ArrayList<>();
+        String SELECT = "SELECT * FROM Manager";
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT,null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+               taiKhoans.add(new TaiKhoan(cursor.getString(0),cursor.getString(1)));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return taiKhoans;
+
     }
 
 

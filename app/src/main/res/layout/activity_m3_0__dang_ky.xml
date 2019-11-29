@@ -32,11 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
+            android:id="@+id/tvl_username"
             android:hint="Tài Khoản"
             android:textColorHint="#FF0000">
 
             <EditText
                 android:inputType="text"
+                android:id="@+id/edtUsername_register"
                 android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,11 +50,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
-
+            android:id="@+id/tvl_password1"
             android:hint="Mật Khẩu"
             android:textColorHint="#FF0000">
 
             <EditText
+                android:id="@+id/edtPassword_register1"
                 android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,11 +67,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
-
+            android:id="@+id/tvl_password2"
             android:hint="Xác Nhận Mật Khẩu"
             android:textColorHint="#FF0000">
 
             <EditText
+                android:id="@+id/edtPassword_register2"
                 android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
