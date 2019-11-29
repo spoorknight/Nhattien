@@ -4,19 +4,22 @@ public class TaiKhoan {
     public String username;
     public String iduser;
     public String password;
+    public String player;
 
-    public TaiKhoan(String username, String iduser, String password) {
+    public TaiKhoan(String username, String iduser, String password, String player) {
         this.username = username;
         this.iduser = iduser;
         this.password = password;
+        this.player = player;
+    }
+
+    public TaiKhoan(String username, String password, String player) {
+        this.username = username;
+        this.password = password;
+        this.player = player;
     }
 
     public TaiKhoan() {
-    }
-
-    public TaiKhoan(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     public String getUsername() {
@@ -41,6 +44,14 @@ public class TaiKhoan {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
     }
 }
 
