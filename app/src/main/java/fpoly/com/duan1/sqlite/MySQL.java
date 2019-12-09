@@ -162,7 +162,7 @@ public class MySQL extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-               taiKhoans.add(new TaiKhoan(cursor.getString(0),cursor.getString(1),cursor.getString(2)));
+               taiKhoans.add(new TaiKhoan(cursor.getString(0),cursor.getString(1),cursor.getString(2    )));
                 cursor.moveToNext();
             }
             cursor.close();
