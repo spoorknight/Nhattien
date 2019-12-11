@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_marginTop="16dp"
+    android:layout_margin="10dp"
     android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,8 +12,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_margin="5dp"
+            android:layout_height="80dp"
             android:background="@drawable/thanh_xep_hang"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
