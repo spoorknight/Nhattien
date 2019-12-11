@@ -266,4 +266,9 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         stopBackMusic();
         startActivity(new Intent(M4_0_HomeActivity.this, M6_0_XepHangActivity.class));
     }
+
+    public void dangXuat(View view) {
+        stopBackMusic();
+        startActivity(new Intent(this,M2_0_LoginActivity.class));
+    }
 }
