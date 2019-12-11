@@ -207,10 +207,9 @@ public class MySQL extends SQLiteOpenHelper {
 
     public List<XepHang> getAllDiemCao() {
         List<XepHang> taiKhoan=new ArrayList<>();
-        String SELECT = "SELECT * FROM HighScore a INNER JOIN Manager b on a.idUser=b.id ORDER by Score LIMIT 10";
+        String SELECT = "SELECT * FROM HighScore a INNER JOIN Manager b on a.idUser=b.id ORDER by Score DESC LIMIT 10";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery(SELECT, null);
-
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
