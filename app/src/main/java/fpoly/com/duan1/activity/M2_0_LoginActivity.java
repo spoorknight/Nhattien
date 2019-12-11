@@ -1,17 +1,15 @@
 package fpoly.com.duan1.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -36,6 +34,7 @@ public class M2_0_LoginActivity extends BaseActivity implements M2_0_LoginView {
     private EditText edtTaiKhoan;
     private TextInputLayout tipMK;
     private EditText edtMatKhau;
+    private CheckBox ckb;
 
 
     @Override
@@ -47,6 +46,8 @@ public class M2_0_LoginActivity extends BaseActivity implements M2_0_LoginView {
         mySQL.createDataBase();
         taiKhoans = mySQL.getAllTaiKhoan();
 
+
+        ckb = (CheckBox) findViewById(R.id.ckb);
 
         tipTK = (TextInputLayout) findViewById(R.id.tipTK);
         edtTaiKhoan = (EditText) findViewById(R.id.edtTaiKhoan);
@@ -74,6 +75,8 @@ public class M2_0_LoginActivity extends BaseActivity implements M2_0_LoginView {
         Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.m20_dangnhap0);
         animation2.setInterpolator(new LinearInterpolator());
         lnlM201.startAnimation(animation2);
+
+        checkRemember();
     }
 
     public void btnDangKyClick(View view) {
@@ -120,12 +123,38 @@ public class M2_0_LoginActivity extends BaseActivity implements M2_0_LoginView {
         M5_0_StartActivity.idUser = mySQL.getTaiKhoan(edtTaiKhoan.getText().toString());
 //Animation
         outActivity();
+        if (ckb.isChecked()) {
+            mySQL.updateUser();
+            mySQL.updateUser(edtTaiKhoan.getText().toString());
+        } else {
+            mySQL.updateUser();
+        }
 //chuyển màn hình
         startActivityAnimation(this, 1000, M4_0_HomeActivity.class);
+
+
     }
 
     @Override
     public void saiTenDN() {
         Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu!!!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void checkRemember() {
+        boolean b = false;
+        TaiKhoan taiKhoan = new TaiKhoan("", "", "", "", "");
+        for (int i = 0; i < taiKhoans.size(); i++) {
+            if (taiKhoans.get(i).getRemember() != null) {
+                if (taiKhoans.get(i).getRemember().equals("y")) {
+                    b = true;
+                    taiKhoan = taiKhoans.get(i);
+                }
+            }
+
+        }
+        edtTaiKhoan.setText(taiKhoan.getUsername());
+        edtMatKhau.setText(taiKhoan.getPassword());
+        ckb.setChecked(b);
+
     }
 }

@@ -1128,8 +1128,8 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
                             d = "15%";
                             break;
                         case 2:
-                            tvCotB.setHeight(100);
-                            tvCotA.setHeight(200);
+                            tvCotB.setHeight(200);
+                            tvCotA.setHeight(100);
                             tvCotC.setHeight(0);
                             tvCotD.setHeight(100);
                             a = "25%";

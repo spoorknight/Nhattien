@@ -68,6 +68,7 @@
             android:layout_height="wrap_content">
 
             <CheckBox
+                android:id="@+id/ckb"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
                 android:background="#1864E6"

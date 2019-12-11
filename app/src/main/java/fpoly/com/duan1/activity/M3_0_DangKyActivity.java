@@ -142,7 +142,7 @@ public class M3_0_DangKyActivity extends BaseActivity implements M3_0_DangKyView
                     Intent intent = new Intent(M3_0_DangKyActivity.this, M3_1_DangKyInGameActivity.class);
                     sleep(1000);
                     overridePendingTransition(0, 0);
-                    intent.putExtra("user", new TaiKhoan("", edtUsernameRegister.getText().toString(), edtPasswordRegister1.getText().toString(), ""));
+                    intent.putExtra("user", new TaiKhoan("", edtUsernameRegister.getText().toString(), edtPasswordRegister1.getText().toString(), "",""));
                     startActivity(intent);
                     overridePendingTransition(0, 0);
 

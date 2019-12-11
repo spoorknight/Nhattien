@@ -160,6 +160,22 @@ public class MySQL extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public void updateUser(String user){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("remember","y");
+        sqLiteDatabase.update("Manager", contentValues,"Username=?",new String[]{ user});
+        sqLiteDatabase.close();
+    }
+
+    public void updateUser( ){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("remember","");
+        sqLiteDatabase.update("Manager", contentValues, null,new  String[]{});
+        sqLiteDatabase.close();
+    }
+
     public String getTaiKhoan(String username) {
         String taiKhoan = null;
         String SELECT = "SELECT * FROM  Manager WHERE username like '"+username+"'";
@@ -186,7 +202,7 @@ public class MySQL extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                taiKhoan.add(new TaiKhoan(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
+                taiKhoan.add(new TaiKhoan(cursor.getString(1),cursor.getString(0),cursor.getString(2),cursor.getString(3),cursor.getString(4)));
                 cursor.moveToNext();
             }
             cursor.close();

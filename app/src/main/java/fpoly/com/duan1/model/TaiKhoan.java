@@ -7,17 +7,23 @@ public class TaiKhoan implements Serializable {
     private String iduser;
     private String password;
     private String player;
+    private String remember;
 
+    public String getRemember() {
+        return remember;
+    }
 
+    public void setRemember(String remember) {
+        this.remember = remember;
+    }
 
-    public TaiKhoan(String iduser,String username, String password, String player) {
+    public TaiKhoan(String username, String iduser, String password, String player, String remember) {
         this.username = username;
         this.iduser = iduser;
         this.password = password;
         this.player = player;
+        this.remember = remember;
     }
-
-
 
     public String getUsername() {
         return username;
