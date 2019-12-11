@@ -5,8 +5,8 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="10dp"
+        android:layout_height="70dp"
+        android:layout_margin="2dp"
         android:background="@drawable/thanh_xep_hang"
         android:orientation="horizontal">
         <FrameLayout
