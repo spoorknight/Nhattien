@@ -327,10 +327,6 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
     public void ganCauHoi() {
         khClick();
         suDung50 = false;
-        lnlDapAnC.setClickable(true);
-        lnlDapAnA.setClickable(true);
-        lnlDapAnB.setClickable(true);
-        lnlDapAnD.setClickable(true);
         tvA.setTextColor(Color.WHITE);
         tvAnsA.setTextColor(Color.WHITE);
         tvB.setTextColor(Color.WHITE);
@@ -342,7 +338,6 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         lnlDapAnD.setBackgroundResource(R.drawable.dapan);
         lnlDapAnA.setBackgroundResource(R.drawable.dapan);
         lnlDapAnB.setBackgroundResource(R.drawable.dapan);
-        lnlDapAnC.setBackgroundResource(R.drawable.dapan);
         lnlDapAnC.setBackgroundResource(R.drawable.dapan);
         troGiup50 = false;
         ganTien();
@@ -464,8 +459,8 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
                 View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_chucmung, null);
                 builder.setView(view1);
                 builder.create();
-                alertDialog = builder.show();
                 builder.setCancelable(false);
+                alertDialog = builder.show();
 
                 mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
@@ -749,15 +744,15 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
 
 
                 builder.create();
-                alertDialog = builder.show();
                 builder.setCancelable(false);
+                alertDialog = builder.show();
 
 
             }
         });
         builder.create();
-        alertDialog2 = builder.show();
         builder.setCancelable(false);
+        alertDialog2 = builder.show();
     }
 
     //Dừng đồng hồ khi chọn sự trợ giúp
@@ -1275,15 +1270,15 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
 
 
                         builder.create();
-                        alertDialog = builder.show();
                         builder.setCancelable(false);
+                        alertDialog = builder.show();
 
                     }
                 });
 
                 builder.create();
-                alertDialog = builder.show();
                 builder.setCancelable(false);
+                alertDialog = builder.show();
             }
         };
         countDownTimer.start();
@@ -1361,8 +1356,8 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
 
 
         builder.create();
-        alertDialog = builder.show();
         builder.setCancelable(false);
+        alertDialog = builder.show();
     }
 
     @Override
