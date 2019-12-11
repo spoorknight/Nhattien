@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginTop="16dp"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,32 +32,34 @@
 
         <TextView
             android:id="@+id/tvPlayer"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:text="Tiến"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"
-            android:text="Hoàng Bá Long"
             android:textColor="#FFFF"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textSize="22sp"
+            android:textStyle="bold"  />
 
         <TextView
             android:id="@+id/tvTienThuong"
             android:layout_gravity="center_vertical"
-            android:layout_width="130dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="150.000.000"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:text="150000"
             android:textColor="#FFFF"
             android:textSize="22sp"
             android:textStyle="bold" />
 
-<ImageView
-    android:layout_marginLeft="16dp"
-    android:layout_gravity="center"
-    android:src="@drawable/coin"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/coin"  />
 
     </LinearLayout>
 </LinearLayout>

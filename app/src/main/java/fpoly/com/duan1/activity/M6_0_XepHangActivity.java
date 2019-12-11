@@ -33,8 +33,6 @@ public class M6_0_XepHangActivity extends AppCompatActivity {
         bangrXepHangAdapter=new BangrXepHangAdapter(xepHangs,M6_0_XepHangActivity.this);
         recy.setAdapter(bangrXepHangAdapter);
         recy.setLayoutManager(new LinearLayoutManager(this));
-
-
     }
 
 
