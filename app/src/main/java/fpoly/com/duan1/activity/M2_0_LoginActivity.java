@@ -1,5 +1,6 @@
 package fpoly.com.duan1.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -78,6 +79,7 @@ public class M2_0_LoginActivity extends BaseActivity implements M2_0_LoginView {
 
         checkRemember();
     }
+
 
     public void btnDangKyClick(View view) {
 

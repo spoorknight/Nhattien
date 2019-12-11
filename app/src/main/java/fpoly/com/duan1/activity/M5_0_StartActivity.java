@@ -85,7 +85,6 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         setContentView(R.layout.activity_m5_0__start);
 
 
-        Toast.makeText(this, idUser, Toast.LENGTH_SHORT).show();
 
         m5Presenter = new M5Presenter(this);
         //Ánh xạ các thành phần giao diện
@@ -93,7 +92,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         //Animation
         animationLucVao();
         //kích hoạt đồng hồ
-        m5Presenter.clock();
+        clock();
         //Lấy dữ liệu List câu hỏi
         dataQues();
         //gán câu hỏi
@@ -232,7 +231,6 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
     //Dừng nhạc nền
     public void stopBackMusic() {
         if (at) {
-
             mediaPlayer.stop();
         }
     }
@@ -999,8 +997,8 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
         View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_dungchoi, null);
         builder.setView(view1);
-        Button btnNoDialog;
-        Button btnYesDialog;
+        final Button btnNoDialog;
+        final Button btnYesDialog;
 
         btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
         btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
@@ -1013,17 +1011,13 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
             }
         });
 
-        btnYesDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         btnYesDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imgHoiNhom.setClickable(false);
+                btnNoDialog.setClickable(false);
+                btnYesDialog.setClickable(false);
                 dungDongHo();
                 suDungHoi = true;
                 musicTinhHuong(R.raw.bg_audience);
@@ -1033,8 +1027,8 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
             }
         });
         builder.create();
-        alertDialog = builder.show();
         builder.setCancelable(false);
+        alertDialog = builder.show();
 
     }
 
@@ -1174,8 +1168,8 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
 
 
                 builder.create();
-                alertDialog1 = builder.show();
                 builder.setCancelable(false);
+                alertDialog1 = builder.show();
             }
         });
 
@@ -1189,7 +1183,6 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
 
     }
 
-    @Override
     public void clock() {
 
         giayClock = 32;

@@ -12,9 +12,7 @@ public class M5Presenter {
         this.m5View = m5View;
     }
 
-    public void clock() {
-        m5View.clock();
-    }
+
 
     public void dungCuocChoiHelp() {
         m5View.imgDungChoi();
