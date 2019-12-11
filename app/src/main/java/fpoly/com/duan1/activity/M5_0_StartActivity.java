@@ -70,7 +70,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
     //Các thành phần hoạt động
 
     private M5Presenter m5Presenter;
-    private boolean troGiup50 = false;
+    private boolean troGiup50  = false;
     private int cauSo = 1, tienThuong = 0, viTriDA, dapAnChon;
     private MySQL mySQL;
     private List<CauHoi> cauHois;
@@ -319,7 +319,237 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
     }
 
     public void ganTien() {
-        m5Presenter.ganTienThuong(cauSo);
+        switch (cauSo) {
+            case 1:
+
+                if (at) {
+                    musicTinhHuong(R.raw.ques01);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc1);
+                        }
+                    });
+                }
+                khClick();
+                img50.setImageResource(R.drawable.button_image_help_5050);
+                imgCall.setImageResource(R.drawable.button_image_help_call);
+                imgHoiNhom.setImageResource(R.drawable.button_image_help_audience);
+
+                tienThuong = 0;
+                tvTienThuong.setText("200");
+
+                break;
+
+            case 2:
+
+                if (at) {
+                    musicTinhHuong(R.raw.ques02);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc1);
+                        }
+                    });
+                }
+                tienThuong = 200000;
+                tvTienThuong.setText("400");
+
+                break;
+
+            case 3:
+                if (at) {
+                    musicTinhHuong(R.raw.ques03);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc1);
+                        }
+                    });
+                }
+                tienThuong = 400000;
+                tvTienThuong.setText("600");
+                break;
+
+            case 4:
+                if (at) {
+                    musicTinhHuong(R.raw.ques04);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc1);
+                        }
+                    });
+                }
+                tienThuong = 600000;
+                tvTienThuong.setText("1.000");
+
+                break;
+
+            case 5: if (at) {
+                musicTinhHuong(R.raw.ques05);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        backMusic(R.raw.moc1);
+                    }
+                });
+            }
+                tienThuong = 1000000;
+                tvTienThuong.setText("2.000");
+
+                break;
+
+            case 6:
+                if (at) {
+                    musicTinhHuong(R.raw.ques06);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc2);
+                        }
+                    });
+                }
+                tienThuong = 2000000;
+                tvTienThuong.setText("3.000");
+
+                break;
+
+            case 7:
+                if (at) {
+                    musicTinhHuong(R.raw.ques07);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc2);
+                        }
+                    });
+                }
+                tienThuong = 3000000;
+                tvTienThuong.setText("6.000");
+
+                break;
+
+            case 8:
+                if (at) {
+                    musicTinhHuong(R.raw.ques08);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc2);
+                        }
+                    });
+                }
+                tienThuong = 6000000;
+                tvTienThuong.setText("10.000");
+
+                break;
+
+            case 9:
+                if (at) {
+                    musicTinhHuong(R.raw.ques09);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc2);
+                        }
+                    });
+                }
+                tienThuong = 10000000;
+                tvTienThuong.setText("14.000");
+
+                break;
+
+            case 10:
+                if (at) {
+                    musicTinhHuong(R.raw.ques10);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc2);
+                        }
+                    });
+                }
+                tienThuong = 14000000;
+                tvTienThuong.setText("22.000");
+
+                break;
+
+            case 11:
+                if (at) {
+                    musicTinhHuong(R.raw.ques11);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc3);
+                        }
+                    });
+                }
+                tienThuong = 22000000;
+                tvTienThuong.setText("30.000");
+
+                break;
+
+            case 12:
+                if (at) {
+                    musicTinhHuong(R.raw.ques12);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc3);
+                        }
+                    });
+                }
+                tienThuong = 30000000;
+                tvTienThuong.setText("40.000");
+
+                break;
+
+            case 13:
+                if (at) {
+                    musicTinhHuong(R.raw.ques13);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc3);
+                        }
+                    });
+                }
+                tienThuong = 40000000;
+                tvTienThuong.setText("60.000");
+
+                break;
+
+            case 14:
+                if (at) {
+                    musicTinhHuong(R.raw.ques14);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc3);
+                        }
+                    });
+                }
+                tienThuong = 60000000;
+                tvTienThuong.setText("85.000");
+
+                break;
+
+            case 15:
+                if (at) {
+                    musicTinhHuong(R.raw.ques15);
+                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            backMusic(R.raw.moc3);
+                        }
+                    });
+                }
+                tienThuong = 85000000;
+                tvTienThuong.setText("150.000");
+
+                break;
+        }
     }
 
 
