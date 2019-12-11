@@ -85,6 +85,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         setContentView(R.layout.activity_m5_0__start);
 
 
+        random = new Random();
 
         m5Presenter = new M5Presenter(this);
         //Ánh xạ các thành phần giao diện
@@ -132,7 +133,6 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
     }
 
     private void dataQues() {
-        random = new Random();
         mySQL = new MySQL(this);
         mySQL.createDataBase();
         List<CauHoi1> cauHoi1s = mySQL.getAllCauHoi1();
