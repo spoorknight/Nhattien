@@ -44,12 +44,15 @@ public class M4_0_HomeActivity extends AppCompatActivity {
     private AlertDialog alertDialog;
     private MediaPlayer mediaPlayer0;
     public static boolean at;
+    private String id;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m4_0__home);
+
+         id = getIntent().getStringExtra("id");
 
 
 //Ánh xạ các thành phần
@@ -79,10 +82,10 @@ public class M4_0_HomeActivity extends AppCompatActivity {
 
 //Chạy nhạc nền
 
-        at=getIntent().getBooleanExtra("at",true);
-         if (!at){
-             btnAmThanhM40.setText("Âm thanh: Tắt");
-         }
+        at = getIntent().getBooleanExtra("at", true);
+        if (!at) {
+            btnAmThanhM40.setText("Âm thanh: Tắt");
+        }
 
         backMusic();
 
@@ -148,13 +151,16 @@ public class M4_0_HomeActivity extends AppCompatActivity {
                     mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
-                            M5_0_StartActivity.at=true;
-                            startActivity(new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class));
+                            M5_0_StartActivity.at = true;
+                            Intent intent=new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class);
+                            intent.putExtra("id",id);
+                            startActivity(intent);
                         }
                     });
                 } else {
-
-                    startActivity(new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class));
+                    Intent intent=new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class);
+                    intent.putExtra("id",id);
+                    startActivity(intent);
                 }
 
             }
@@ -165,7 +171,6 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         builder.setCancelable(false);
 
     }
-
 
 
     //Load nhạc nền

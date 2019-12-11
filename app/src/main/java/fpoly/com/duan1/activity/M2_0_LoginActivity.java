@@ -6,28 +6,57 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.List;
+
 import fpoly.com.duan1.R;
 import fpoly.com.duan1.base.BaseActivity;
+import fpoly.com.duan1.model.TaiKhoan;
+import fpoly.com.duan1.presenter.M2_0_LoginPresenter;
+import fpoly.com.duan1.sqlite.MySQL;
+import fpoly.com.duan1.view.M2_0_LoginView;
 
-public class M2_0_LoginActivity extends BaseActivity {
+public class M2_0_LoginActivity extends BaseActivity implements M2_0_LoginView {
     public static String in = "true";
     private ImageView imgvIconM20;
     private LinearLayout lnlM20;
     private LinearLayout lnlM201;
+    private M2_0_LoginPresenter m2_0_loginPresenter;
+    private MySQL mySQL;
+    private List<TaiKhoan> taiKhoans;
+    private TextInputLayout tipTK;
+    private EditText edtTaiKhoan;
+    private TextInputLayout tipMK;
+    private EditText edtMatKhau;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m2_0__login);
 
+        mySQL = new MySQL(this);
+        mySQL.createDataBase();
+        taiKhoans = mySQL.getAllTaiKhoan();
+
+
+        tipTK = (TextInputLayout) findViewById(R.id.tipTK);
+        edtTaiKhoan = (EditText) findViewById(R.id.edtTaiKhoan);
+        tipMK = (TextInputLayout) findViewById(R.id.tipMK);
+        edtMatKhau = (EditText) findViewById(R.id.edtMatKhau);
+
         imgvIconM20 = (ImageView) findViewById(R.id.imgvIconM20);
         lnlM20 = (LinearLayout) findViewById(R.id.lnlM20);
         lnlM201 = (LinearLayout) findViewById(R.id.lnlM201);
+        m2_0_loginPresenter = new M2_0_LoginPresenter(this);
 
 //Xét các hiệu ứng animation khi vào màn hình
         if (in.equals("true")) {
@@ -56,10 +85,7 @@ public class M2_0_LoginActivity extends BaseActivity {
 
     public void btnDangNhapM20(View view) {
 
-//Animation
-        outActivity();
-//chuyển màn hình
-        startActivityAnimation(this, 1000, M4_0_HomeActivity.class);
+        m2_0_loginPresenter.checkLogin();
 
     }
 
@@ -71,5 +97,35 @@ public class M2_0_LoginActivity extends BaseActivity {
         Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.m20_dangnhap0_out);
         animation2.setInterpolator(new LinearInterpolator());
         lnlM201.startAnimation(animation2);
+    }
+
+    @Override
+    public boolean checkND() {
+        String taiKhoan = edtTaiKhoan.getText().toString();
+        String matKhau = edtMatKhau.getText().toString();
+        boolean a = false;
+        for (int i = 0; i < taiKhoans.size(); i++) {
+            if (taiKhoan.equals(taiKhoans.get(i).getUsername()) && matKhau.equals(taiKhoans.get(i).getPassword())) {
+                a = true;
+                break;
+            } else {
+                a = false;
+            }
+        }
+        return a;
+    }
+
+    @Override
+    public void loginThanhCong() {
+        M5_0_StartActivity.idUser = mySQL.getTaiKhoan(edtTaiKhoan.getText().toString());
+//Animation
+        outActivity();
+//chuyển màn hình
+        startActivityAnimation(this, 1000, M4_0_HomeActivity.class);
+    }
+
+    @Override
+    public void saiTenDN() {
+        Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu!!!", Toast.LENGTH_SHORT).show();
     }
 }

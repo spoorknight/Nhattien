@@ -14,9 +14,13 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
+
 import fpoly.com.duan1.R;
 import fpoly.com.duan1.base.BaseActivity;
+import fpoly.com.duan1.model.TaiKhoan;
 import fpoly.com.duan1.presenter.M3_0_Presenter;
+import fpoly.com.duan1.sqlite.MySQL;
 import fpoly.com.duan1.view.M3_0_DangKyView;
 
 public class M3_0_DangKyActivity extends BaseActivity implements M3_0_DangKyView {
@@ -31,6 +35,8 @@ public class M3_0_DangKyActivity extends BaseActivity implements M3_0_DangKyView
     private TextInputLayout tvlPassword2;
     private EditText edtPasswordRegister2;
     private M3_0_Presenter m30Presenter;
+    private TaiKhoan taiKhoan;
+    private MySQL mySQL;
 
 
     @Override
@@ -48,7 +54,7 @@ public class M3_0_DangKyActivity extends BaseActivity implements M3_0_DangKyView
         tvlPassword2 = (TextInputLayout) findViewById(R.id.tvl_password2);
         edtPasswordRegister2 = (EditText) findViewById(R.id.edtPassword_register2);
 
-         m30Presenter = new M3_0_Presenter(this);
+        m30Presenter = new M3_0_Presenter(this);
 //Animation
         Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.m20_dangnhap);
         animation1.setInterpolator(new LinearInterpolator());
@@ -59,6 +65,15 @@ public class M3_0_DangKyActivity extends BaseActivity implements M3_0_DangKyView
 
 
         lnlM31.startAnimation(animation2);
+        taiKhoan = (TaiKhoan) getIntent().getSerializableExtra("user");
+        if (taiKhoan != null) {
+            edtUsernameRegister.setText(taiKhoan.getUsername());
+            edtPasswordRegister1.setText(taiKhoan.getPassword());
+            edtPasswordRegister2.setText(taiKhoan.getPassword());
+        }
+        mySQL = new MySQL(this);
+        mySQL.createDataBase();
+
     }
 
     public void btnQuayLaiM30(View view) {
@@ -92,6 +107,26 @@ public class M3_0_DangKyActivity extends BaseActivity implements M3_0_DangKyView
     }
 
     public void btnTiepTucM30(View view) {
+        m30Presenter.checkTaiKhoan(edtUsernameRegister.getText().toString(), edtPasswordRegister1.getText().toString(), edtPasswordRegister2.getText().toString());
+    }
+
+
+    @Override
+    public void taiKhoanKHongHopLe() {
+        tvlUsername.setError("Tài khoản chứa ít nhất 10 ký tự");
+    }
+
+    @Override
+    public void matKhauKhongHopLe() {
+        tvlPassword1.setError("Mật khẩu chứa ít nhất 8 ký tự");
+    }
+
+    @Override
+    public void dangKyThanhCong() {
+        tvlUsername.setErrorEnabled(false);
+        tvlPassword2.setErrorEnabled(false);
+        tvlPassword1.setErrorEnabled(false);
+        //Animation cho các View ra
         Animation animation1 = AnimationUtils.loadAnimation(this, R.anim.m20_dangnhap_out);
         animation1.setInterpolator(new LinearInterpolator());
         lnlM30.startAnimation(animation1);
@@ -99,28 +134,73 @@ public class M3_0_DangKyActivity extends BaseActivity implements M3_0_DangKyView
         Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.m20_dangnhap0_out);
         animation2.setInterpolator(new LinearInterpolator());
         lnlM31.startAnimation(animation2);
-//chuyển màn hình
 
-        startActivityAnimation(this,1000,M3_1_DangKyInGameActivity.class);
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Intent intent = new Intent(M3_0_DangKyActivity.this, M3_1_DangKyInGameActivity.class);
+                    sleep(1000);
+                    overridePendingTransition(0, 0);
+                    intent.putExtra("user", new TaiKhoan("", edtUsernameRegister.getText().toString(), edtPasswordRegister1.getText().toString(), ""));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                super.run();
+            }
+        };
+        thread.start();
+
     }
 
     @Override
-    public void dangky() {
-
+    public void matKhauKhongHopLe1() {
+        tvlPassword2.setError("Mật khẩu chứa ít nhất 8 ký tự");
     }
 
     @Override
-    public void seterrorUsernameRegister() {
-        tvlUsername.setError("Không được để trống");
+    public void taiKhoanHopLe() {
+        tvlUsername.setErrorEnabled(false);
     }
 
     @Override
-    public void seterrorPasswordRegister() {
-        tvlPassword1.setError("Không được để trống");
+    public void matKhauHopLe() {
+
+        tvlPassword1.setErrorEnabled(false);
     }
 
     @Override
-    public void navigate() {
+    public void matKhauHopLe1() {
 
+        tvlPassword2.setErrorEnabled(false);
+    }
+
+    @Override
+    public void matKhauChuaTrung() {
+        tvlPassword2.setError("Hai mật khẩu chưa khớp nhau!!!");
+    }
+
+    @Override
+    public boolean checkUsser() {
+        String taiKhoan = edtUsernameRegister.getText().toString();
+        List<TaiKhoan> taiKhoans = mySQL.getAllTaiKhoan();
+        boolean a=true;
+        for (int i = 0; i < taiKhoans.size(); i++) {
+            if (taiKhoan.equals(taiKhoans.get(i).getUsername())) {
+                a = false;
+                break;
+            } else {
+                a = true;
+            }
+        }
+        return a;
+    }
+
+    @Override
+    public void taiKhoanDaTonTai() {
+        tvlUsername.setError("Tài khoản đã tồn tại");
     }
 }

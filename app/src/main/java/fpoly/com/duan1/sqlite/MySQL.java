@@ -18,7 +18,9 @@ import java.util.List;
 import fpoly.com.duan1.model.CauHoi1;
 import fpoly.com.duan1.model.CauHoi2;
 import fpoly.com.duan1.model.CauHoi3;
+import fpoly.com.duan1.model.DiemCao;
 import fpoly.com.duan1.model.TaiKhoan;
+import fpoly.com.duan1.model.XepHang;
 
 public class MySQL extends SQLiteOpenHelper {
 
@@ -146,30 +148,80 @@ public class MySQL extends SQLiteOpenHelper {
         }
         return books;
     }
+
+    //Tài khoản
     public void insertUser(TaiKhoan taiKhoan){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("Username",taiKhoan.getUsername());
         contentValues.put("Password",taiKhoan.getPassword());
+        contentValues.put("Player",taiKhoan.getPlayer());
         sqLiteDatabase.insert("Manager",null,contentValues);
         sqLiteDatabase.close();
     }
-    public List<TaiKhoan> getAllTaiKhoan(){
-        List<TaiKhoan> taiKhoans = new ArrayList<>();
-        String SELECT = "SELECT * FROM Manager";
+
+    public String getTaiKhoan(String username) {
+        String taiKhoan = null;
+        String SELECT = "SELECT * FROM  Manager WHERE username like '"+username+"'";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(SELECT,null);
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT, null);
+
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-               taiKhoans.add(new TaiKhoan(cursor.getString(0),cursor.getString(1),cursor.getString(2    )));
+                taiKhoan=cursor.getString(0);
                 cursor.moveToNext();
             }
             cursor.close();
         }
-        return taiKhoans;
-
+        return taiKhoan;
     }
+
+    public List<TaiKhoan> getAllTaiKhoan() {
+        List<TaiKhoan> taiKhoan=new ArrayList<>();
+        String SELECT = "SELECT * FROM  Manager";
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                taiKhoan.add(new TaiKhoan(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return taiKhoan;
+    }
+
+    //điẻmm cao
+    public void insertDiem(DiemCao diemCao){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Score",diemCao.getSoDiem());
+        contentValues.put("idUser",diemCao.getIdUser());
+        sqLiteDatabase.insert("HighScore",null,contentValues);
+        sqLiteDatabase.close();
+    }
+
+
+    public List<XepHang> getAllDiemCao() {
+        List<XepHang> taiKhoan=new ArrayList<>();
+        String SELECT = "SELECT * FROM HighScore a INNER JOIN Manager b on a.idUser=b.id ORDER by Score DESC LIMIT 10";
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(SELECT, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                taiKhoan.add(new XepHang(cursor.getString(1),cursor.getString(6) ));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return taiKhoan;
+    }
+
 
 
     @Override

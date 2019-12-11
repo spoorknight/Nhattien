@@ -28,4 +28,10 @@ public class BaseActivity extends AppCompatActivity {
         };
         thread.start();
     }
+
+    public void chuyenManHinh(Class mhChuyen,String idUser){
+        Intent intent=new Intent(this,mhChuyen);
+        intent.putExtra("idUser",idUser);
+        startActivity(intent);
+    }
 }

@@ -1,26 +1,23 @@
 package fpoly.com.duan1.model;
 
-public class TaiKhoan {
-    public String username;
-    public String iduser;
-    public String password;
-    public String player;
+import java.io.Serializable;
 
-    public TaiKhoan(String username, String iduser, String password, String player) {
+public class TaiKhoan implements Serializable {
+    private String username;
+    private String iduser;
+    private String password;
+    private String player;
+
+
+
+    public TaiKhoan(String iduser,String username, String password, String player) {
         this.username = username;
         this.iduser = iduser;
         this.password = password;
         this.player = player;
     }
 
-    public TaiKhoan(String username, String password, String player) {
-        this.username = username;
-        this.password = password;
-        this.player = player;
-    }
 
-    public TaiKhoan() {
-    }
 
     public String getUsername() {
         return username;

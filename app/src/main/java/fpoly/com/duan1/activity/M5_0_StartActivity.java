@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ import fpoly.com.duan1.model.CauHoi;
 import fpoly.com.duan1.model.CauHoi1;
 import fpoly.com.duan1.model.CauHoi2;
 import fpoly.com.duan1.model.CauHoi3;
+import fpoly.com.duan1.model.DiemCao;
 import fpoly.com.duan1.presenter.M5Presenter;
 import fpoly.com.duan1.sqlite.MySQL;
 import fpoly.com.duan1.view.M5View;
@@ -73,7 +75,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
     private MySQL mySQL;
     private List<CauHoi> cauHois;
     private Random random;
-
+    public static String idUser;
     private boolean troGiup5050 = true, troGiupCall = true, troGiupHoi = true, suDung50 = false, suDungCall = false, suDungHoi = false;
 
 
@@ -82,6 +84,9 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m5_0__start);
 
+
+
+        Toast.makeText(this,idUser,Toast.LENGTH_SHORT).show();
 
         m5Presenter = new M5Presenter(this);
         //Ánh xạ các thành phần giao diện
@@ -249,259 +254,33 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
 
     //sự kiện dừng cuộc chơi
     public void imgDungChoi(View view) {
-        musicTinhHuong(R.raw.touch_sound);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
-        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_dungchoi, null);
-        builder.setView(view1);
-        Button btnNoDialog;
-        Button btnYesDialog;
-
-        btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
-        btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
-
-        //hủy quyền trợ giúp
-        btnNoDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        //chấp nhận
-        btnYesDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                countDownTimer.cancel();
-                stopBackMusic();
-                musicTinhHuong(R.raw.lose);
-                AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
-                View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_nhanhthuong, null);
-                builder.setView(view1);
-                TextView tvSoTienThuong;
-                final Button btnOkNhanThuong;
-
-                tvSoTienThuong = (TextView) view1.findViewById(R.id.tvSoTienThuong);
-                btnOkNhanThuong = (Button) view1.findViewById(R.id.btnOkNhanThuong);
-
-                tvSoTienThuong.setText(convertTien());
-
-
-                btnOkNhanThuong.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        stopMTH();
-                        btnOkNhanThuong.setClickable(false);
-                        if (at) {
-                            M4_0_HomeActivity.at = true;
-                        }
-                        Intent intent = new Intent(M5_0_StartActivity.this, M4_0_HomeActivity.class);
-                        if (at) {
-                            intent.putExtra("at", true);
-                        } else {
-
-                            intent.putExtra("at", false);
-                        }
-                        startActivity(intent);
-
-                    }
-                });
-
-
-                builder.create();
-                alertDialog = builder.show();
-                builder.setCancelable(false);
-
-
-            }
-        });
-
-
-        builder.create();
-        alertDialog = builder.show();
-        builder.setCancelable(false);
+        m5Presenter.dungCuocChoiHelp();
     }
 
 
     //Sự kiện click vào trợ giúp 50:50
     public void btn50(View view) {
-        //Mở nhạc tình huống
-        musicTinhHuong(R.raw.touch_sound);
-        //Hiện dialog 'Có chắc chắn sử dụng quyền trợ giúp'
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
-        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_dungchoi, null);
-        builder.setView(view1);
-        Button btnNoDialog;
-        Button btnYesDialog;
-
-        btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
-        btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
-
-        //hủy quyền trợ giúp
-        btnNoDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        //Chấp nhận sử dụng quyền trợ giúp 50
-        btnYesDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                countDownTimer.cancel();
-                dungDongHo();
-                suDung50 = true;
-                troGiup5050 = false;
-                alertDialog.dismiss();
-                stopBackMusic();
-                musicTinhHuong(R.raw.sound5050);
-                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        img50.setImageResource(R.drawable.button_image_helpx_5050_x);
-                        musicTinhHuong(R.raw.s50);
-                        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                backMusic(R.raw.moc1);
-                            }
-                        });
-                        pasueClock();
-
-                        if (viTriDA == 1) {
-                            tvAnsB.setText("");
-                            lnlDapAnB.setClickable(false);
-                            tvAnsC.setText("");
-                            lnlDapAnC.setClickable(false);
-                        } else if (viTriDA == 2) {
-                            tvAnsA.setText("");
-                            lnlDapAnA.setClickable(false);
-                            tvAnsC.setText("");
-                            lnlDapAnC.setClickable(false);
-                        } else if (viTriDA == 3) {
-                            tvAnsB.setText("");
-                            lnlDapAnB.setClickable(false);
-                            tvAnsD.setText("");
-                            lnlDapAnD.setClickable(false);
-                        } else {
-
-                            tvAnsB.setText("");
-                            lnlDapAnB.setClickable(false);
-                            tvAnsC.setText("");
-                            lnlDapAnC.setClickable(false);
-
-                        }
-                    }
-                });
-            }
-        });
-        builder.create();
-        alertDialog = builder.show();
-        builder.setCancelable(false);
+        m5Presenter.troGiup5050();
     }
 
     //Sự kiện clcik vào câu trả lời A
     public void ansA(View view) {
-        dungDongHo();
-        dapAnChon = 1;
-        tvA.setTextColor(Color.BLUE);
-        tvAnsA.setTextColor(Color.BLUE);
-        vhhClick();
-        lnlDapAnA.setBackgroundResource(R.drawable.chose);
-        countDownTimer.cancel();
-        stopBackMusic();
-        musicTinhHuong(R.raw.ans_a);
-        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                musicTinhHuong(R.raw.ans_now1);
-                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        //Kiểm tra câu trả lời
-                        checkCauTL();
-                    }
-                });
-            }
-        });
+        m5Presenter.clickDapAnA();
     }
 
     //Sự kiện clcik vào câu trả lời B
     public void ansB(View view) {
-        dungDongHo();
-        dapAnChon = 2;
-        tvB.setTextColor(Color.BLUE);
-        tvAnsB.setTextColor(Color.BLUE);
-        vhhClick();
-        lnlDapAnB.setBackgroundResource(R.drawable.chose);
-        countDownTimer.cancel();
-        stopBackMusic();
-        musicTinhHuong(R.raw.ans_b);
-        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                musicTinhHuong(R.raw.ans_now1);
-                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        //Kiểm tra câu trả lời
-                        checkCauTL();
-                    }
-                });
-            }
-        });
+        m5Presenter.clickDapAnB();
     }
 
     //Sự kiện clcik vào câu trả lời C
     public void ansC(View view) {
-        dungDongHo();
-        dapAnChon = 3;
-        tvC.setTextColor(Color.BLUE);
-        tvAnsC.setTextColor(Color.BLUE);
-        vhhClick();
-        lnlDapAnC.setBackgroundResource(R.drawable.chose);
-        countDownTimer.cancel();
-        stopBackMusic();
-        musicTinhHuong(R.raw.ans_c);
-        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                musicTinhHuong(R.raw.ans_now1);
-                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        //Kiểm tra câu trả lời
-                        checkCauTL();
-                    }
-                });
-            }
-        });
+        m5Presenter.clickDapAnC();
     }
 
     //Sự kiện clcik vào câu trả lời D
     public void ansD(View view) {
-        dungDongHo();
-        dapAnChon = 4;
-        tvD.setTextColor(Color.BLUE);
-        tvAnsD.setTextColor(Color.BLUE);
-        vhhClick();
-        lnlDapAnD.setBackgroundResource(R.drawable.chose);
-        countDownTimer.cancel();
-        stopBackMusic();
-        musicTinhHuong(R.raw.ans_d);
-        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                musicTinhHuong(R.raw.ans_now1);
-                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        //Kiểm tra câu trả lời
-                        checkCauTL();
-                    }
-                });
-            }
-        });
+        m5Presenter.clickDapAnD();
     }
 
     //Test nhấp nháy đáp án
@@ -536,222 +315,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
     }
 
     public void ganTien() {
-        switch (cauSo) {
-            case 1:
-                if (at) {
-                    musicTinhHuong(R.raw.ques01);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc1);
-                        }
-                    });
-                }
-                khClick();
-                img50.setImageResource(R.drawable.button_image_help_5050);
-                imgCall.setImageResource(R.drawable.button_image_help_call);
-                imgHoiNhom.setImageResource(R.drawable.button_image_help_audience);
-
-                tienThuong = 0;
-                tvTienThuong.setText("200");
-                break;
-
-            case 2:
-                if (at) {
-                    musicTinhHuong(R.raw.ques02);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc1);
-                        }
-                    });
-                }
-                tienThuong = 200000;
-                tvTienThuong.setText("400");
-                break;
-
-            case 3:
-                if (at) {
-                    musicTinhHuong(R.raw.ques03);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc1);
-                        }
-                    });
-                }
-                tienThuong = 400000;
-                tvTienThuong.setText("600");
-                break;
-
-            case 4:
-                if (at) {
-                    musicTinhHuong(R.raw.ques04);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc1);
-                        }
-                    });
-                }
-                tienThuong = 600000;
-                tvTienThuong.setText("1.000");
-                break;
-
-            case 5:
-                if (at) {
-                    musicTinhHuong(R.raw.ques05);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc1);
-                        }
-                    });
-                }
-                tienThuong = 1000000;
-                tvTienThuong.setText("2.000");
-                break;
-
-            case 6:
-                if (at) {
-                    musicTinhHuong(R.raw.ques06);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc2);
-                        }
-                    });
-                }
-                tienThuong = 2000000;
-                tvTienThuong.setText("3.000");
-                break;
-
-            case 7:
-                if (at) {
-                    musicTinhHuong(R.raw.ques07);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc2);
-                        }
-                    });
-                }
-                tienThuong = 3000000;
-                tvTienThuong.setText("6.000");
-                break;
-
-            case 8:
-                if (at) {
-                    musicTinhHuong(R.raw.ques08);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc2);
-                        }
-                    });
-                }
-                tienThuong = 6000000;
-                tvTienThuong.setText("10.000");
-                break;
-
-            case 9:
-                if (at) {
-                    musicTinhHuong(R.raw.ques09);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc2);
-                        }
-                    });
-                }
-                tienThuong = 10000000;
-                tvTienThuong.setText("14.000");
-                break;
-
-            case 10:
-                if (at) {
-                    musicTinhHuong(R.raw.ques10);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc2);
-                        }
-                    });
-                }
-                tienThuong = 14000000;
-                tvTienThuong.setText("22.000");
-                break;
-
-            case 11:
-                if (at) {
-                    musicTinhHuong(R.raw.ques11);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc3);
-                        }
-                    });
-                }
-                tienThuong = 22000000;
-                tvTienThuong.setText("30.000");
-                break;
-
-            case 12:
-                if (at) {
-                    musicTinhHuong(R.raw.ques12);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc3);
-                        }
-                    });
-                }
-                tienThuong = 30000000;
-                tvTienThuong.setText("40.000");
-                break;
-
-            case 13:
-                if (at) {
-                    musicTinhHuong(R.raw.ques13);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc3);
-                        }
-                    });
-                }
-                tienThuong = 40000000;
-                tvTienThuong.setText("60.000");
-                break;
-
-            case 14:
-                if (at) {
-                    musicTinhHuong(R.raw.ques14);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc3);
-                        }
-                    });
-                }
-                tienThuong = 60000000;
-                tvTienThuong.setText("85.000");
-                break;
-
-            case 15:
-                if (at) {
-                    musicTinhHuong(R.raw.ques15);
-                    mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            backMusic(R.raw.moc3);
-                        }
-                    });
-                }
-                tienThuong = 85000000;
-                tvTienThuong.setText("150.000");
-                break;
-        }
+        m5Presenter.ganTienThuong(cauSo);
     }
 
 
@@ -854,14 +418,13 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
                                 View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_nhanhthuong, null);
                                 builder.setView(view1);
-                                TextView tvSoTienThuong;
                                 Button btnOkNhanThuong;
 
-                                tvSoTienThuong = (TextView) view1.findViewById(R.id.tvSoTienThuong);
                                 btnOkNhanThuong = (Button) view1.findViewById(R.id.btnOkNhanThuong);
                                 btnOkNhanThuong.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        luuDiem();
                                         stopBackMusic();
                                         if (at) {
 
@@ -975,6 +538,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
                     btnYesDialog.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            luuDiem();
                             stopMTH();
                             musicTinhHuong(R.raw.lose);
                             AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
@@ -1252,6 +816,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
                 btnYesDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        luuDiem();
                         stopMTH();
                         musicTinhHuong(R.raw.lose);
                         AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
@@ -1677,6 +1242,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
                 btnYesDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        luuDiem();
                         stopMTH();
                         musicTinhHuong(R.raw.lose);
                         AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
@@ -1722,5 +1288,501 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
             }
         };
         countDownTimer.start();
+    }
+
+    @Override
+    public void imgDungChoi() {
+
+        musicTinhHuong(R.raw.touch_sound);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_dungchoi, null);
+        builder.setView(view1);
+        Button btnNoDialog;
+        Button btnYesDialog;
+
+        btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
+        btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
+
+        //hủy quyền trợ giúp
+        btnNoDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        //chấp nhận
+        btnYesDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countDownTimer.cancel();
+                stopBackMusic();
+                musicTinhHuong(R.raw.lose);
+                AlertDialog.Builder builder = new AlertDialog.Builder(M5_0_StartActivity.this, R.style.DialogCustomTheme);
+                View view1 = LayoutInflater.from(M5_0_StartActivity.this).inflate(R.layout.dialog_nhanhthuong, null);
+                builder.setView(view1);
+                TextView tvSoTienThuong;
+                final Button btnOkNhanThuong;
+
+                tvSoTienThuong = (TextView) view1.findViewById(R.id.tvSoTienThuong);
+                btnOkNhanThuong = (Button) view1.findViewById(R.id.btnOkNhanThuong);
+
+                tvSoTienThuong.setText(convertTien());
+
+
+                btnOkNhanThuong.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        luuDiem();
+                        stopMTH();
+                        btnOkNhanThuong.setClickable(false);
+                        if (at) {
+                            M4_0_HomeActivity.at = true;
+                        }
+                        Intent intent = new Intent(M5_0_StartActivity.this, M4_0_HomeActivity.class);
+                        if (at) {
+                            intent.putExtra("at", true);
+                        } else {
+
+                            intent.putExtra("at", false);
+                        }
+                        startActivity(intent);
+
+                    }
+                });
+
+
+                builder.create();
+                alertDialog = builder.show();
+                builder.setCancelable(false);
+
+
+            }
+        });
+
+
+        builder.create();
+        alertDialog = builder.show();
+        builder.setCancelable(false);
+    }
+
+    @Override
+    public void troGiup5050() {
+
+        //Mở nhạc tình huống
+        musicTinhHuong(R.raw.touch_sound);
+        //Hiện dialog 'Có chắc chắn sử dụng quyền trợ giúp'
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogCustomTheme);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_dungchoi, null);
+        builder.setView(view1);
+        Button btnNoDialog;
+        Button btnYesDialog;
+
+        btnNoDialog = (Button) view1.findViewById(R.id.btnNoDialog);
+        btnYesDialog = (Button) view1.findViewById(R.id.btnYesDialog);
+
+        //hủy quyền trợ giúp
+        btnNoDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        //Chấp nhận sử dụng quyền trợ giúp 50
+        btnYesDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countDownTimer.cancel();
+                dungDongHo();
+                suDung50 = true;
+                troGiup5050 = false;
+                alertDialog.dismiss();
+                stopBackMusic();
+                musicTinhHuong(R.raw.sound5050);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        img50.setImageResource(R.drawable.button_image_helpx_5050_x);
+                        musicTinhHuong(R.raw.s50);
+                        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                backMusic(R.raw.moc1);
+                            }
+                        });
+                        pasueClock();
+
+                        if (viTriDA == 1) {
+                            tvAnsB.setText("");
+                            lnlDapAnB.setClickable(false);
+                            tvAnsC.setText("");
+                            lnlDapAnC.setClickable(false);
+                        } else if (viTriDA == 2) {
+                            tvAnsA.setText("");
+                            lnlDapAnA.setClickable(false);
+                            tvAnsC.setText("");
+                            lnlDapAnC.setClickable(false);
+                        } else if (viTriDA == 3) {
+                            tvAnsB.setText("");
+                            lnlDapAnB.setClickable(false);
+                            tvAnsD.setText("");
+                            lnlDapAnD.setClickable(false);
+                        } else {
+
+                            tvAnsB.setText("");
+                            lnlDapAnB.setClickable(false);
+                            tvAnsC.setText("");
+                            lnlDapAnC.setClickable(false);
+
+                        }
+                    }
+                });
+            }
+        });
+        builder.create();
+        alertDialog = builder.show();
+        builder.setCancelable(false);
+    }
+
+    @Override
+    public void clickDAA() {
+
+        dungDongHo();
+        dapAnChon = 1;
+        tvA.setTextColor(Color.BLUE);
+        tvAnsA.setTextColor(Color.BLUE);
+        vhhClick();
+        lnlDapAnA.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_a);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                        checkCauTL();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void clickDAB() {
+
+        dungDongHo();
+        dapAnChon = 2;
+        tvB.setTextColor(Color.BLUE);
+        tvAnsB.setTextColor(Color.BLUE);
+        vhhClick();
+        lnlDapAnB.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_b);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                        checkCauTL();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void clickDAC() {
+
+        dungDongHo();
+        dapAnChon = 3;
+        tvC.setTextColor(Color.BLUE);
+        tvAnsC.setTextColor(Color.BLUE);
+        vhhClick();
+        lnlDapAnC.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_c);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                        checkCauTL();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void clickDAD() {
+
+        dungDongHo();
+        dapAnChon = 4;
+        tvD.setTextColor(Color.BLUE);
+        tvAnsD.setTextColor(Color.BLUE);
+        vhhClick();
+        lnlDapAnD.setBackgroundResource(R.drawable.chose);
+        countDownTimer.cancel();
+        stopBackMusic();
+        musicTinhHuong(R.raw.ans_d);
+        mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                musicTinhHuong(R.raw.ans_now1);
+                mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        //Kiểm tra câu trả lời
+                        checkCauTL();
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void cauSo1() {
+        if (at) {
+            musicTinhHuong(R.raw.ques01);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc1);
+                }
+            });
+        }
+        khClick();
+        img50.setImageResource(R.drawable.button_image_help_5050);
+        imgCall.setImageResource(R.drawable.button_image_help_call);
+        imgHoiNhom.setImageResource(R.drawable.button_image_help_audience);
+
+        tienThuong = 0;
+        tvTienThuong.setText("200");
+    }
+
+    @Override
+    public void cauSo2() {
+        if (at) {
+            musicTinhHuong(R.raw.ques02);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc1);
+                }
+            });
+        }
+        tienThuong = 200000;
+        tvTienThuong.setText("400");
+    }
+
+    @Override
+    public void cauSo3() {
+        if (at) {
+            musicTinhHuong(R.raw.ques03);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc1);
+                }
+            });
+        }
+        tienThuong = 400000;
+        tvTienThuong.setText("600");
+    }
+
+    @Override
+    public void cauSo4() {
+        if (at) {
+            musicTinhHuong(R.raw.ques04);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc1);
+                }
+            });
+        }
+        tienThuong = 600000;
+        tvTienThuong.setText("1.000");
+    }
+
+    @Override
+    public void cauSo5() {
+        if (at) {
+            musicTinhHuong(R.raw.ques05);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc1);
+                }
+            });
+        }
+        tienThuong = 1000000;
+        tvTienThuong.setText("2.000");
+    }
+
+    @Override
+    public void cauSo6() {
+        if (at) {
+            musicTinhHuong(R.raw.ques06);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc2);
+                }
+            });
+        }
+        tienThuong = 2000000;
+        tvTienThuong.setText("3.000");
+    }
+
+    @Override
+    public void cauSo7() {
+        if (at) {
+            musicTinhHuong(R.raw.ques07);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc2);
+                }
+            });
+        }
+        tienThuong = 3000000;
+        tvTienThuong.setText("6.000");
+    }
+
+    @Override
+    public void cauSo8() {
+        if (at) {
+            musicTinhHuong(R.raw.ques08);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc2);
+                }
+            });
+        }
+        tienThuong = 6000000;
+        tvTienThuong.setText("10.000");
+    }
+
+    @Override
+    public void cauSo9() {
+        if (at) {
+            musicTinhHuong(R.raw.ques09);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc2);
+                }
+            });
+        }
+        tienThuong = 10000000;
+        tvTienThuong.setText("14.000");
+    }
+
+    @Override
+    public void cauSo10() {
+        if (at) {
+            musicTinhHuong(R.raw.ques10);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc2);
+                }
+            });
+        }
+        tienThuong = 14000000;
+        tvTienThuong.setText("22.000");
+    }
+
+    @Override
+    public void cauSo11() {
+        if (at) {
+            musicTinhHuong(R.raw.ques11);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc3);
+                }
+            });
+        }
+        tienThuong = 22000000;
+        tvTienThuong.setText("30.000");
+    }
+
+    @Override
+    public void cauSo12() {
+        if (at) {
+            musicTinhHuong(R.raw.ques12);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc3);
+                }
+            });
+        }
+        tienThuong = 30000000;
+        tvTienThuong.setText("40.000");
+    }
+
+    @Override
+    public void cauSo13() {
+        if (at) {
+            musicTinhHuong(R.raw.ques13);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc3);
+                }
+            });
+        }
+        tienThuong = 40000000;
+        tvTienThuong.setText("60.000");
+    }
+
+    @Override
+    public void cauSo14() {
+        if (at) {
+            musicTinhHuong(R.raw.ques14);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc3);
+                }
+            });
+        }
+        tienThuong = 60000000;
+        tvTienThuong.setText("85.000");
+    }
+
+    @Override
+    public void cauSo15() {
+        if (at) {
+            musicTinhHuong(R.raw.ques15);
+            mediaPlayer0.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    backMusic(R.raw.moc3);
+                }
+            });
+        }
+        tienThuong = 85000000;
+        tvTienThuong.setText("150.000");
+    }
+    public void luuDiem(){
+        mySQL.insertDiem(new DiemCao(tienThuong,idUser));
     }
 }

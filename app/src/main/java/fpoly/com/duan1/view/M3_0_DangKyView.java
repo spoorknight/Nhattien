@@ -1,12 +1,23 @@
 package fpoly.com.duan1.view;
 
 public interface M3_0_DangKyView {
-    void dangky();
+    void taiKhoanKHongHopLe();
 
+    void matKhauKhongHopLe();
 
-    void seterrorUsernameRegister();
+    void dangKyThanhCong();
 
-    void seterrorPasswordRegister();
+    void matKhauKhongHopLe1();
 
-    void navigate();
+    void taiKhoanHopLe();
+
+    void matKhauHopLe();
+
+    void matKhauHopLe1();
+
+    void matKhauChuaTrung();
+
+    boolean checkUsser();
+
+    void taiKhoanDaTonTai();
 }
