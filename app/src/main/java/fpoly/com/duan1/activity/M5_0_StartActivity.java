@@ -85,8 +85,7 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         setContentView(R.layout.activity_m5_0__start);
 
 
-
-        Toast.makeText(this,idUser,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, idUser, Toast.LENGTH_SHORT).show();
 
         m5Presenter = new M5Presenter(this);
         //Ánh xạ các thành phần giao diện
@@ -141,34 +140,41 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         List<CauHoi2> cauHoi2s = mySQL.getAllCauHoi2();
         List<CauHoi3> cauHoi3s = mySQL.getAllCauHoi3();
         cauHois = new ArrayList<>();
-        // gán các câu hỏi sau khi random vào list câu hỏi
 
 
-        int rd = random.nextInt(5);
-        int rd1 = random.nextInt(5) + 4;
-        int rd2 = random.nextInt(5) + 8;
-        int rd3 = random.nextInt(5) + 12;
-        int rd4 = random.nextInt(5) + 15;
 
-        cauHois.add(new CauHoi(cauHoi1s.get(rd).getId(), cauHoi1s.get(rd).getCauHoi(), cauHoi1s.get(rd).getDapAnDung(), cauHoi1s.get(rd).getDapAnSai1(), cauHoi1s.get(rd).getDapAnSai2(), cauHoi1s.get(rd).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi1s.get(rd1).getId(), cauHoi1s.get(rd1).getCauHoi(), cauHoi1s.get(rd1).getDapAnDung(), cauHoi1s.get(rd1).getDapAnSai1(), cauHoi1s.get(rd1).getDapAnSai2(), cauHoi1s.get(rd1).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi1s.get(rd2).getId(), cauHoi1s.get(rd2).getCauHoi(), cauHoi1s.get(rd2).getDapAnDung(), cauHoi1s.get(rd2).getDapAnSai1(), cauHoi1s.get(rd2).getDapAnSai2(), cauHoi1s.get(rd2).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi1s.get(rd3).getId(), cauHoi1s.get(rd3).getCauHoi(), cauHoi1s.get(rd3).getDapAnDung(), cauHoi1s.get(rd3).getDapAnSai1(), cauHoi1s.get(rd3).getDapAnSai2(), cauHoi1s.get(rd3).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi1s.get(rd4).getId(), cauHoi1s.get(rd4).getCauHoi(), cauHoi1s.get(rd4).getDapAnDung(), cauHoi1s.get(rd4).getDapAnSai1(), cauHoi1s.get(rd4).getDapAnSai2(), cauHoi1s.get(rd4).getDapAnSai3()));
+        List<Integer> integers = new ArrayList<>();
+        int iNew = 0;
+        for (int i = 0; i < 5; ) {
+            iNew = random.nextInt(20);
+            if (!integers.contains(iNew)) {
+                i++;
+                integers.add(iNew);
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < integers.size(); j++) {
+
+                switch (i) {
+                    case 0:
+                        cauHois.add(new CauHoi(cauHoi1s.get(integers.get(j)).getId(), cauHoi1s.get(integers.get(j)).getCauHoi(), cauHoi1s.get(integers.get(j)).getDapAnDung(), cauHoi1s.get(integers.get(j)).getDapAnSai1(), cauHoi1s.get(integers.get(j)).getDapAnSai2(), cauHoi1s.get(integers.get(j)).getDapAnSai3()));
+
+                        break;
+                    case 1:
+                        cauHois.add(new CauHoi(cauHoi2s.get(integers.get(j)).getId(), cauHoi2s.get(integers.get(j)).getCauHoi(), cauHoi2s.get(integers.get(j)).getDapAnDung(), cauHoi2s.get(integers.get(j)).getDapAnSai1(), cauHoi2s.get(integers.get(j)).getDapAnSai2(), cauHoi2s.get(integers.get(j)).getDapAnSai3()));
+
+                        break;
+                    case 2:
+                        cauHois.add(new CauHoi(cauHoi3s.get(integers.get(j)).getId(), cauHoi3s.get(integers.get(j)).getCauHoi(), cauHoi3s.get(integers.get(j)).getDapAnDung(), cauHoi3s.get(integers.get(j)).getDapAnSai1(), cauHoi3s.get(integers.get(j)).getDapAnSai2(), cauHoi3s.get(integers.get(j)).getDapAnSai3()));
+
+                        break;
+                }
+
+            }
+        }
 
 
-        cauHois.add(new CauHoi(cauHoi2s.get(rd).getId(), cauHoi2s.get(rd).getCauHoi(), cauHoi2s.get(rd).getDapAnDung(), cauHoi2s.get(rd).getDapAnSai1(), cauHoi2s.get(rd).getDapAnSai2(), cauHoi2s.get(rd).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi2s.get(rd1).getId(), cauHoi2s.get(rd1).getCauHoi(), cauHoi2s.get(rd1).getDapAnDung(), cauHoi2s.get(rd1).getDapAnSai1(), cauHoi2s.get(rd1).getDapAnSai2(), cauHoi2s.get(rd1).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi2s.get(rd2).getId(), cauHoi2s.get(rd2).getCauHoi(), cauHoi2s.get(rd2).getDapAnDung(), cauHoi2s.get(rd2).getDapAnSai1(), cauHoi2s.get(rd2).getDapAnSai2(), cauHoi2s.get(rd2).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi2s.get(rd3).getId(), cauHoi2s.get(rd3).getCauHoi(), cauHoi2s.get(rd3).getDapAnDung(), cauHoi2s.get(rd3).getDapAnSai1(), cauHoi2s.get(rd3).getDapAnSai2(), cauHoi2s.get(rd3).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi2s.get(rd4).getId(), cauHoi2s.get(rd4).getCauHoi(), cauHoi2s.get(rd4).getDapAnDung(), cauHoi2s.get(rd4).getDapAnSai1(), cauHoi2s.get(rd4).getDapAnSai2(), cauHoi2s.get(rd4).getDapAnSai3()));
-
-
-        cauHois.add(new CauHoi(cauHoi3s.get(rd).getId(), cauHoi3s.get(rd).getCauHoi(), cauHoi3s.get(rd).getDapAnDung(), cauHoi3s.get(rd).getDapAnSai1(), cauHoi3s.get(rd).getDapAnSai2(), cauHoi3s.get(rd).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi3s.get(rd1).getId(), cauHoi3s.get(rd1).getCauHoi(), cauHoi3s.get(rd1).getDapAnDung(), cauHoi3s.get(rd1).getDapAnSai1(), cauHoi3s.get(rd1).getDapAnSai2(), cauHoi3s.get(rd1).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi3s.get(rd2).getId(), cauHoi3s.get(rd2).getCauHoi(), cauHoi3s.get(rd2).getDapAnDung(), cauHoi3s.get(rd2).getDapAnSai1(), cauHoi3s.get(rd2).getDapAnSai2(), cauHoi3s.get(rd2).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi3s.get(rd3).getId(), cauHoi3s.get(rd3).getCauHoi(), cauHoi3s.get(rd3).getDapAnDung(), cauHoi3s.get(rd3).getDapAnSai1(), cauHoi3s.get(rd3).getDapAnSai2(), cauHoi3s.get(rd3).getDapAnSai3()));
-        cauHois.add(new CauHoi(cauHoi3s.get(rd4).getId(), cauHoi3s.get(rd4).getCauHoi(), cauHoi3s.get(rd4).getDapAnDung(), cauHoi3s.get(rd4).getDapAnSai1(), cauHoi3s.get(rd4).getDapAnSai2(), cauHoi3s.get(rd4).getDapAnSai3()));
 
     }
 
@@ -1782,7 +1788,8 @@ public class M5_0_StartActivity extends AppCompatActivity implements M5View {
         tienThuong = 85000000;
         tvTienThuong.setText("150.000");
     }
-    public void luuDiem(){
-        mySQL.insertDiem(new DiemCao(tienThuong,idUser));
+
+    public void luuDiem() {
+        mySQL.insertDiem(new DiemCao(tienThuong, idUser));
     }
 }

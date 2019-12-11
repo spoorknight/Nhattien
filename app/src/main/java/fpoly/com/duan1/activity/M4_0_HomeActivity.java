@@ -52,7 +52,7 @@ public class M4_0_HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m4_0__home);
 
-         id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("id");
 
 
 //Ánh xạ các thành phần
@@ -152,14 +152,14 @@ public class M4_0_HomeActivity extends AppCompatActivity {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
                             M5_0_StartActivity.at = true;
-                            Intent intent=new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class);
-                            intent.putExtra("id",id);
+                            Intent intent = new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class);
+                            intent.putExtra("id", id);
                             startActivity(intent);
                         }
                     });
                 } else {
-                    Intent intent=new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class);
-                    intent.putExtra("id",id);
+                    Intent intent = new Intent(M4_0_HomeActivity.this, M5_0_StartActivity.class);
+                    intent.putExtra("id", id);
                     startActivity(intent);
                 }
 
@@ -269,6 +269,6 @@ public class M4_0_HomeActivity extends AppCompatActivity {
 
     public void dangXuat(View view) {
         stopBackMusic();
-        startActivity(new Intent(this,M2_0_LoginActivity.class));
+        startActivity(new Intent(this, M2_0_LoginActivity.class));
     }
 }
